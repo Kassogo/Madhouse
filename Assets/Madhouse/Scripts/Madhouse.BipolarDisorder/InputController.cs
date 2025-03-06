@@ -1,31 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 
 namespace Madhouse.BipolarDisorder
 {
-
+    /// <summary>
+    /// This class gets command 'Space' 
+    /// </summary>
     public class InputController : MonoBehaviour
     {
-        private SpriteRenderer _spriteRenderer;
-        private Color _whiteColor = Color.white;
-        private Color _blackColor = Color.black;
- 
-   
-        void Start()
-        {
-            _spriteRenderer = GetComponent<SpriteRenderer>();
-            _spriteRenderer.color = _whiteColor;   
-        }
+        private KeyCode _codeAction = KeyCode.Space;
 
-   
-        void Update()
+        public event Action onKeyDownAction = () => {};
+
+        private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                _spriteRenderer.color = (_spriteRenderer.color == _whiteColor) ? _blackColor : _whiteColor;
-            }
+            if (Input.GetKeyDown(_codeAction))
+                onKeyDownAction.Invoke();
         }
     }
 
