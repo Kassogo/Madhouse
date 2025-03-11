@@ -227,6 +227,7 @@ GameObject:
   - component: {fileID: 1087326912}
   - component: {fileID: 1087326916}
   - component: {fileID: 1087326915}
+  - component: {fileID: 1087326917}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -388,6 +389,19 @@ MonoBehaviour:
   _inputController: {fileID: 719726816}
   _positiveColor: {r: 1, g: 1, b: 1, a: 1}
   _negativeColor: {r: 0, g: 0, b: 0, a: 1}
+--- !u!114 &1087326917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087326910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb72fff36c0a8ac48864f6cbd12e98d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colorController: {fileID: 1087326916}
 --- !u!1 &1130305712
 GameObject:
   m_ObjectHideFlags: 0
