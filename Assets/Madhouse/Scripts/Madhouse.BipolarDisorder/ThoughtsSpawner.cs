@@ -2,30 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace Madhouse.BipolarDisorder
 {
+    /// <summary>
+    /// This method spawns thoughts
+    /// </summary>
     public class ThoughtsSpawner : MonoBehaviour
     {
-        public GameObject ThoughtPrefab; 
-        public float spawnInterval = 1.5f; 
-        public float spawnRangeX = 8f;
+        [SerializeField] private GameObject _thoughtPrefab;
+        [SerializeField] private Transform _spawnPoint;
+
+        private float spawnInterval = 1.5f;
+        
         void Start()
         {
             InvokeRepeating("SpawnThought", 1f, spawnInterval);
         }
 
-
         void SpawnThought()
         {
-            if (ThoughtPrefab == null) return;
+            if (_thoughtPrefab == null || _spawnPoint == null) return;
 
-            Vector2 spawnPosition = new Vector2(0, 7);
+            GameObject newThought = Instantiate(_thoughtPrefab, _spawnPoint.position, Quaternion.identity);
 
-            GameObject newThought = Instantiate(ThoughtPrefab, spawnPosition, Quaternion.identity);
-            
-            SpriteRenderer sr = newThought.GetComponent<SpriteRenderer>();
-            sr.color = Random.value > 0.5f ? Color.white : Color.black;
+            SpriteRenderer spriteRenderer = newThought.GetComponent<SpriteRenderer>();
+            spriteRenderer.color = Random.value > 0.5f ? Color.white : Color.black;
         }
     }
 }
