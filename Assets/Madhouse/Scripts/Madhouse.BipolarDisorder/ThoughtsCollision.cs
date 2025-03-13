@@ -15,11 +15,9 @@ namespace Madhouse.BipolarDisorder
         {
             if (!collision.gameObject.TryGetComponent(out SpriteRenderer thoughtRenderer)) return;
 
-            // Check color match and update score
             bool isMatch = _colorMatcher.IsColorMatch(thoughtRenderer);
             _scoreManager.UpdateScore(isMatch);
 
-            // Destroy the thought after collision
             Destroy(collision.gameObject);
         }
     }
