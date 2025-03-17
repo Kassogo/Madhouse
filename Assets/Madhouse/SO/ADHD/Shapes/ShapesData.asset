@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84d6ed1daf39bf47bb08a0350e8ec06, type: 3}
+  m_Name: ShapesData
+  m_EditorClassIdentifier: 
+  _shapeModels:
+  - _shapePicture: {fileID: 943116791, guid: 09eae0b725d410a45be1b1dd369a7fc2, type: 3}
+    _glarePicture: {fileID: 22751783, guid: 09eae0b725d410a45be1b1dd369a7fc2, type: 3}
+    _shapeType: 0
+  - _shapePicture: {fileID: -1405956613, guid: 09eae0b725d410a45be1b1dd369a7fc2, type: 3}
+    _glarePicture: {fileID: 572706792, guid: 09eae0b725d410a45be1b1dd369a7fc2, type: 3}
+    _shapeType: 2
+  - _shapePicture: {fileID: 507495495, guid: 09eae0b725d410a45be1b1dd369a7fc2, type: 3}
+    _glarePicture: {fileID: 1747794735, guid: 09eae0b725d410a45be1b1dd369a7fc2, type: 3}
+    _shapeType: 1
+  - _shapePicture: {fileID: -1552108552, guid: 09eae0b725d410a45be1b1dd369a7fc2, type: 3}
+    _glarePicture: {fileID: 438969531, guid: 09eae0b725d410a45be1b1dd369a7fc2, type: 3}
+    _shapeType: 3
+  - _shapePicture: {fileID: -1028646350, guid: 09eae0b725d410a45be1b1dd369a7fc2, type: 3}
+    _glarePicture: {fileID: -242718597, guid: 09eae0b725d410a45be1b1dd369a7fc2, type: 3}
+    _shapeType: 4

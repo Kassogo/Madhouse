@@ -1,0 +1,240 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5e2b949bcb6c5f43a54020576903174, type: 3}
+  m_Name: TasksData
+  m_EditorClassIdentifier: 
+  _tasks:
+  - _firstTask:
+      _taskType: 3
+      _interactionEnd: 0
+      _shapeColor: 2
+      _shapeForm: 0
+    _secondTask:
+      _taskType: 1
+      _interactionEnd: 0
+      _shapeColor: 0
+      _shapeForm: 3
+    _wrongTask:
+      _taskType: 0
+      _interactionEnd: 0
+      _shapeColor: 4
+      _shapeForm: 0
+  - _firstTask:
+      _taskType: 4
+      _interactionEnd: 3
+      _shapeColor: 0
+      _shapeForm: 4
+    _secondTask:
+      _taskType: 0
+      _interactionEnd: 0
+      _shapeColor: 1
+      _shapeForm: 0
+    _wrongTask:
+      _taskType: 2
+      _interactionEnd: 3
+      _shapeColor: 0
+      _shapeForm: 2
+  - _firstTask:
+      _taskType: 3
+      _interactionEnd: 1
+      _shapeColor: 3
+      _shapeForm: 0
+    _secondTask:
+      _taskType: 2
+      _interactionEnd: 2
+      _shapeColor: 0
+      _shapeForm: 0
+    _wrongTask:
+      _taskType: 5
+      _interactionEnd: 0
+      _shapeColor: 3
+      _shapeForm: 0
+  - _firstTask:
+      _taskType: 1
+      _interactionEnd: 1
+      _shapeColor: 0
+      _shapeForm: 0
+    _secondTask:
+      _taskType: 1
+      _interactionEnd: 2
+      _shapeColor: 0
+      _shapeForm: 1
+    _wrongTask:
+      _taskType: 0
+      _interactionEnd: 0
+      _shapeColor: 4
+      _shapeForm: 0
+  - _firstTask:
+      _taskType: 4
+      _interactionEnd: 1
+      _shapeColor: 0
+      _shapeForm: 2
+    _secondTask:
+      _taskType: 0
+      _interactionEnd: 2
+      _shapeColor: 0
+      _shapeForm: 1
+    _wrongTask:
+      _taskType: 0
+      _interactionEnd: 0
+      _shapeColor: 2
+      _shapeForm: 0
+  - _firstTask:
+      _taskType: 2
+      _interactionEnd: 3
+      _shapeColor: 0
+      _shapeForm: 2
+    _secondTask:
+      _taskType: 1
+      _interactionEnd: 2
+      _shapeColor: 0
+      _shapeForm: 3
+    _wrongTask:
+      _taskType: 1
+      _interactionEnd: 0
+      _shapeColor: 2
+      _shapeForm: 2
+  - _firstTask:
+      _taskType: 4
+      _interactionEnd: 2
+      _shapeColor: 0
+      _shapeForm: 4
+    _secondTask:
+      _taskType: 0
+      _interactionEnd: 2
+      _shapeColor: 4
+      _shapeForm: 3
+    _wrongTask:
+      _taskType: 1
+      _interactionEnd: 0
+      _shapeColor: 2
+      _shapeForm: 0
+  - _firstTask:
+      _taskType: 0
+      _interactionEnd: 2
+      _shapeColor: 1
+      _shapeForm: 4
+    _secondTask:
+      _taskType: 2
+      _interactionEnd: 0
+      _shapeColor: 4
+      _shapeForm: 3
+    _wrongTask:
+      _taskType: 0
+      _interactionEnd: 0
+      _shapeColor: 4
+      _shapeForm: 0
+  - _firstTask:
+      _taskType: 3
+      _interactionEnd: 1
+      _shapeColor: 0
+      _shapeForm: 4
+    _secondTask:
+      _taskType: 1
+      _interactionEnd: 0
+      _shapeColor: 4
+      _shapeForm: 0
+    _wrongTask:
+      _taskType: 0
+      _interactionEnd: 0
+      _shapeColor: 3
+      _shapeForm: 0
+  - _firstTask:
+      _taskType: 0
+      _interactionEnd: 1
+      _shapeColor: 4
+      _shapeForm: 4
+    _secondTask:
+      _taskType: 0
+      _interactionEnd: 0
+      _shapeColor: 1
+      _shapeForm: 0
+    _wrongTask:
+      _taskType: 0
+      _interactionEnd: 0
+      _shapeColor: 0
+      _shapeForm: 0
+  - _firstTask:
+      _taskType: 4
+      _interactionEnd: 0
+      _shapeColor: 4
+      _shapeForm: 4
+    _secondTask:
+      _taskType: 1
+      _interactionEnd: 0
+      _shapeColor: 1
+      _shapeForm: 0
+    _wrongTask:
+      _taskType: 1
+      _interactionEnd: 0
+      _shapeColor: 0
+      _shapeForm: 1
+  - _firstTask:
+      _taskType: 1
+      _interactionEnd: 1
+      _shapeColor: 4
+      _shapeForm: 3
+    _secondTask:
+      _taskType: 1
+      _interactionEnd: 0
+      _shapeColor: 1
+      _shapeForm: 4
+    _wrongTask:
+      _taskType: 1
+      _interactionEnd: 0
+      _shapeColor: 0
+      _shapeForm: 2
+  - _firstTask:
+      _taskType: 3
+      _interactionEnd: 3
+      _shapeColor: 0
+      _shapeForm: 3
+    _secondTask:
+      _taskType: 0
+      _interactionEnd: 0
+      _shapeColor: 2
+      _shapeForm: 4
+    _wrongTask:
+      _taskType: 2
+      _interactionEnd: 0
+      _shapeColor: 0
+      _shapeForm: 2
+  - _firstTask:
+      _taskType: 0
+      _interactionEnd: 3
+      _shapeColor: 2
+      _shapeForm: 3
+    _secondTask:
+      _taskType: 0
+      _interactionEnd: 0
+      _shapeColor: 3
+      _shapeForm: 4
+    _wrongTask:
+      _taskType: 0
+      _interactionEnd: 0
+      _shapeColor: 0
+      _shapeForm: 2
+  - _firstTask:
+      _taskType: 1
+      _interactionEnd: 3
+      _shapeColor: 2
+      _shapeForm: 0
+    _secondTask:
+      _taskType: 1
+      _interactionEnd: 0
+      _shapeColor: 3
+      _shapeForm: 2
+    _wrongTask:
+      _taskType: 1
+      _interactionEnd: 0
+      _shapeColor: 0
+      _shapeForm: 4
