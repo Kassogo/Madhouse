@@ -23,17 +23,21 @@ namespace Madhouse.BipolarDisorder
             }
         }
 
-        private void OnEnable()
+        private void Start()
         {
-            Debug.Log("ScoreDisplay OnEnable вызван");
-            if (ScoreManager.Instance != null)
+            Debug.Log("ScoreDisplay Start вызван");
+
+            if (ScoreManager.Instance == null)
             {
-                ScoreManager.Instance.OnScoreChanged += UpdateScoreText;
-                UpdateScoreText(0); // Устанавливаем начальный текст
+                Debug.LogError("ScoreManager.Instance is null! ScoreDisplay не сможет подписаться на события.");
+                return;
             }
+
+            ScoreManager.Instance.OnScoreChanged += UpdateScoreText;
+            UpdateScoreText(ScoreManager.Instance._score); // Устанавливаем актуальный счет
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             if (ScoreManager.Instance != null)
             {
@@ -41,12 +45,12 @@ namespace Madhouse.BipolarDisorder
             }
         }
 
-        private void UpdateScoreText(int _score)
+        private void UpdateScoreText(int score)
         {
-            Debug.Log($"ScoreDisplay получил новый счет: {_score}");
+            Debug.Log($"ScoreDisplay получил новый счет: {score}");
             if (_scoreText != null)
             {
-                _scoreText.text = $"Score: {_score}";
+                _scoreText.text = $"Score: {score}";
             }
         }
     }
