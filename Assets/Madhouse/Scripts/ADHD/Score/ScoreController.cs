@@ -11,6 +11,12 @@ namespace Madhouse.ADHD
 
         private int _score;
 
+        public void ChangeScore(int changeScore)
+        {
+            _score += changeScore;
+            _scoreText.text = _score.ToString();
+        }
+
         private void Awake()
         {
             _spawner.OnDestroyObject += CheckDestroyObject;

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Madhouse.ADHD
 {
-    [CreateAssetMenu(fileName ="ShapesData", menuName ="Madhouse/ShapesData")]
+    [CreateAssetMenu(fileName ="ShapesData", menuName = "Madhouse/ADHD/ShapesData")]
     public class ShapesData : ScriptableObject
     {
         public List<ShapeModel> Shapes => _shapeModels;

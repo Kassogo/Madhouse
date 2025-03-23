@@ -19,6 +19,7 @@ namespace Madhouse.ADHD
         [SerializeField] private ShapeInteraction _shapeInteraction;
         [SerializeField] private float _minTimeOverTask = 8;
         [SerializeField] private float _maxTimeOverTask = 15;
+
         private ShapeTypes _shapeType;
         private ShapeColors _color;
         private InteractionEndTypes _endtype;

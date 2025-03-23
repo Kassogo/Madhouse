@@ -9,7 +9,7 @@ namespace Madhouse.ADHD
 
         public bool IsInteraction => _isInteraction;
 
-        [SerializeField] private LayerMask _layerMask;
+        [SerializeField] private LayerMask _layerMaskBackpack;
 
         private Vector3 _offset;
         private Vector3 _mousePosition;
@@ -73,7 +73,7 @@ namespace Madhouse.ADHD
 
         private void CheckEndInteraction()
         {
-            if (Physics2D.Raycast(transform.position, Vector2.down, _rayDistance, _layerMask))
+            if (Physics2D.Raycast(transform.position, Vector2.down, _rayDistance, _layerMaskBackpack))
             {
                 OnInteractEnd.Invoke(InteractionEndTypes.Taked);
             }

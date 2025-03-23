@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Madhouse.ADHD
 {
-    [CreateAssetMenu(fileName = "TasksData", menuName = "Madhouse/TasksData")]
+    [CreateAssetMenu(fileName = "TasksData", menuName = "Madhouse/ADHD/TasksData")]
     public class TasksData : ScriptableObject
     {
         public List<TaskModel> Tasks => _tasks;
