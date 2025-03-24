@@ -16,7 +16,7 @@ namespace Madhouse.BipolarDisorder
             if (Instance == null)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject); // Теперь объект не уничтожается при смене сцены
+                DontDestroyOnLoad(gameObject);
             }
             else
             {
@@ -25,16 +25,14 @@ namespace Madhouse.BipolarDisorder
             }
         }
 
+        /// <summary>
+        /// Updates the score based on whether there is a match and triggers the score change event.
+        /// </summary>
+        /// <param name="isMatch"></param>
         public void UpdateScore(bool isMatch)
         {
             _score += isMatch ? 1 : -1;
-            Debug.Log($"UpdateScore: {_score}");
             OnScoreChanged?.Invoke(_score);
-
-#if UNITY_EDITOR
-            Debug.ClearDeveloperConsole();
-            Debug.Log($"Score: {_score}");
-#endif
         }
     }
 }

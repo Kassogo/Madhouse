@@ -10,6 +10,9 @@ namespace Madhouse.BipolarDisorder
     {
         private KeyCode _codeAction = KeyCode.Space;
 
+        /// <summary>
+        /// Triggers an action when a specific key is pressed
+        /// </summary>
         public event Action onKeyDownAction = () => {};
 
         private void Update()

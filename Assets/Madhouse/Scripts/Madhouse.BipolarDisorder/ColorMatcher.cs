@@ -14,9 +14,6 @@ namespace Madhouse.BipolarDisorder
             _playerRenderer = GetComponent<SpriteRenderer>();
         }
 
-        public bool IsColorMatch(SpriteRenderer thoughtRenderer)
-        {
-            return _playerRenderer.color == thoughtRenderer.color;
-        }
+        public bool IsColorMatch(SpriteRenderer thoughtRenderer) => _playerRenderer.color == thoughtRenderer.color;
     }
 }

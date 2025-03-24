@@ -27,8 +27,7 @@ namespace Madhouse.BipolarDisorder
 
         private void AssignColor(GameObject thought)
         {
-            ThoughtsColor thoughtsColor = thought.GetComponent<ThoughtsColor>();
-            if (thoughtsColor != null)
+            if (thought.TryGetComponent(out ThoughtsColor thoughtsColor))
             {
                 thoughtsColor.SetRandomColor();
             }
