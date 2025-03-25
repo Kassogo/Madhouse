@@ -6,16 +6,35 @@ namespace Madhouse.AnxietyDisorder
 {
     public class Enemy : MonoBehaviour
     {
+        public static Enemy instance;
+
         [SerializeField] private float _moveSpeed;
+        [SerializeField] private GameObject _damageVisualGO;
+        private float _healthPoit;
         private Transform _target;
         private bool _canMove;
         private bool _canAttack;
 
+        public void TakeEnemyDamage()
+        {
+            _healthPoit -= 1;
+            if(_healthPoit <= 0)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+
+        private void Awake()
+        {
+            instance = this;
+        }
         private void Start()
         {
             _target = GameObject.FindGameObjectWithTag("Brain").GetComponent<Transform>();
             _canMove = true;
             _canAttack = true;
+            _healthPoit = 5;
+            _damageVisualGO.SetActive(false);
         }
         private void FixedUpdate()
         {
@@ -48,6 +67,18 @@ namespace Madhouse.AnxietyDisorder
             _canAttack = false;
             yield return new WaitForSeconds(1f);
             _canAttack = true;
+        }
+
+        private void OnMouseDown()
+        {
+            TakeEnemyDamage();
+            StartCoroutine(_damageVisual());
+        }
+        IEnumerator _damageVisual()
+        {
+            _damageVisualGO.SetActive(true);
+            yield return new WaitForSeconds(0.1f);
+            _damageVisualGO.SetActive(false);
         }
     }
 }
