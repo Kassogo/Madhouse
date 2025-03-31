@@ -18,6 +18,11 @@ namespace Madhouse.BipolarDisorder
             bool isMatch = _colorMatcher.IsColorMatch(thoughtRenderer);
             _scoreManager.UpdateScore(isMatch);
 
+            if (!isMatch && LifeManager.Instance != null)
+            {
+                LifeManager.Instance.LoseLife();
+            }
+
             Destroy(collision.gameObject);
         }
     }

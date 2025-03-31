@@ -13,7 +13,7 @@ namespace Madhouse.BipolarDisorder
         /// <summary>
         /// Triggers an action when a specific key is pressed
         /// </summary>
-        public event Action onKeyDownAction = () => {};
+        public event Action onKeyDownAction = () => { };
 
         private void Update()
         {

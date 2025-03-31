@@ -25,16 +25,14 @@ namespace Madhouse.BipolarDisorder
 
         private void Start()
         {
-            Debug.Log("ScoreDisplay Start вызван");
 
             if (ScoreManager.Instance == null)
             {
-                Debug.LogError("ScoreManager.Instance is null! ScoreDisplay не сможет подписаться на события.");
                 return;
             }
 
             ScoreManager.Instance.OnScoreChanged += UpdateScoreText;
-            UpdateScoreText(ScoreManager.Instance._score); // Устанавливаем актуальный счет
+            UpdateScoreText(ScoreManager.Instance._score); 
         }
 
         private void OnDestroy()
@@ -47,7 +45,6 @@ namespace Madhouse.BipolarDisorder
 
         private void UpdateScoreText(int score)
         {
-            Debug.Log($"ScoreDisplay получил новый счет: {score}");
             if (_scoreText != null)
             {
                 _scoreText.text = $"Score: {score}";

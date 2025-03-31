@@ -1,4 +1,4 @@
-using UnityEngine;
+п»їusing UnityEngine;
 
 namespace Madhouse.BipolarDisorder
 {
@@ -11,8 +11,8 @@ namespace Madhouse.BipolarDisorder
         [SerializeField] private GameObject _thoughtPrefab;
         [SerializeField] private Transform _spawnPoint;
         private float _spawnInterval = 1.5f;
-        private const float _minSpawnInterval = 0.5f; // Минимальный интервал между спавнами
-        private const float _decreaseFactor = 0.05f; // Насколько быстрее будут появляться мысли за 1 очко
+        private const float _minSpawnInterval = 0.5f; 
+        private const float _decreaseFactor = 0.05f; 
 
         private void Start()
         {
