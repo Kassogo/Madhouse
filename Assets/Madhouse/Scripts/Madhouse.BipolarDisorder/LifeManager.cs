@@ -27,9 +27,10 @@ namespace Madhouse.BipolarDisorder
             }
         }
 
-        public void LoseLife(bool isMatch)
+        public void LoseLife()
         {
-            _lives += isMatch ? 1 : -1;
+            _lives--;
+            
             Debug.Log($"Lives left: {_lives}");
             OnLivesChanged?.Invoke(_lives);
 
@@ -45,11 +46,6 @@ namespace Madhouse.BipolarDisorder
         {
             Debug.Log("Game Over!");
             // Здесь можно добавить логику перезапуска уровня или выхода в главное меню
-        }
-
-        internal void LoseLife()
-        {
-            throw new NotImplementedException();
         }
     }
 }
