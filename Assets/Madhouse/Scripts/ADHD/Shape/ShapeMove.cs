@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace Madhouse.ADHD
 {
+    /// <summary>
+    /// Класс-компонент, отвечающий за движение фигуры
+    /// </summary>
     public class ShapeMove : MonoBehaviour
     {
         [SerializeField] private float _speed;

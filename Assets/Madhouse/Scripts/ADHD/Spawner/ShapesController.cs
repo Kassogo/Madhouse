@@ -1,12 +1,14 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Madhouse.ADHD
 {
-    public class Spawner : MonoBehaviour
+    public class ShapesController : MonoBehaviour
     {
-        public event System.Action<ShapeTypes, ShapeColors, InteractionEndTypes> OnDestroyObject = delegate { }; 
-        public event System.Action<SpecialShapeTypes, InteractionEndTypes> OnDestroySpecialObject = delegate { };
+        public event Action<ShapeTypes, ShapeColors, InteractionEndTypes> OnDestroyObject = delegate { }; 
+        public event Action<SpecialShapeTypes, InteractionEndTypes> OnDestroySpecialObject = delegate { };
 
         [SerializeField] private ShapeController _shapePrefab;
         [SerializeField] private SpecialShapeController _specialShapePrefab;
@@ -23,6 +25,10 @@ namespace Madhouse.ADHD
         private bool _isNeedDeleteShape;
         private int _indexShapeForDelete;
 
+        /// <summary>
+        /// Создание специальных фигур.
+        /// </summary>
+        /// <param name="specialShape"></param>
         public void CreateSpecialShape(SpecialShapeTypes specialShape)
         {
             if(_correctShape != null && _wrongShape != null)
@@ -37,6 +43,11 @@ namespace Madhouse.ADHD
             _wrongShape.OnEndInteraction += UseSpecialShape;
         }
 
+        /// <summary>
+        /// Удаление фигуры по типу.
+        /// </summary>
+        /// <param name="shapeColor"></param>
+        /// <param name="_isAllDeleted"></param>
         public void DeleteShape(ShapeColors shapeColor, bool _isAllDeleted = true)
         {
             _isNeedDeleteShape = false;
@@ -63,6 +74,11 @@ namespace Madhouse.ADHD
             }
         }
 
+        /// <summary>
+        /// Удаление фигуры по типу.
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="_isAllDeleted"></param>
         public void DeleteShape(ShapeTypes shape, bool _isAllDeleted = true)
         {
             _isNeedDeleteShape = false;
@@ -89,6 +105,12 @@ namespace Madhouse.ADHD
             }
         }
 
+        /// <summary>
+        /// Удаление фигуры по типу.
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="shapeColor"></param>
+        /// <param name="_isAllDeleted"></param>
         public void DeleteShape(ShapeTypes shape, ShapeColors shapeColor, bool _isAllDeleted = true)
         {
             _isNeedDeleteShape = false;
@@ -140,8 +162,8 @@ namespace Madhouse.ADHD
             _timerCreatedShape = Time.time + _cooldownCreated;
 
             ShapeController shape = Instantiate(_shapePrefab, _spawnPoint, Quaternion.identity);
-            shape.Init((ShapeTypes)Random.Range(0, System.Enum.GetValues(typeof(ShapeTypes)).Length),
-                (ShapeColors)Random.Range(0, System.Enum.GetValues(typeof(ShapeColors)).Length));
+            shape.Init((ShapeTypes)Random.Range(0, Enum.GetValues(typeof(ShapeTypes)).Length),
+                (ShapeColors)Random.Range(0, Enum.GetValues(typeof(ShapeColors)).Length));
             shape.OnEnd += DestroyShape;
             _shapes.Add(shape);
         }

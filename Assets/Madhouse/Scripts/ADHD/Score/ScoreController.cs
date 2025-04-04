@@ -1,27 +1,36 @@
 using UnityEngine;
-using TMPro;
 
 namespace Madhouse.ADHD
 {
+    /// <summary>
+    /// Контролер считывающий выполнение заданий и получение за это очков.
+    /// </summary>
     public class ScoreController : MonoBehaviour
     {
         [SerializeField] private TaskController _taskController;
-        [SerializeField] private Spawner _spawner;
-        [SerializeField] private TextMeshProUGUI _scoreText;
+        [SerializeField] private ShapesController _spawner;
+        [SerializeField] private ScoreView _scoreView;
+        [SerializeField] private int _addScoreForFirstTask = 2;
+        [SerializeField] private int _addScoreForSecondTask = 1;
+        [SerializeField] private int _removeScoreForWrongTask = 2;
 
         private int _score;
 
+        /// <summary>
+        /// Изменение счёта.
+        /// </summary>
+        /// <param name="changeScore"></param>
         public void ChangeScore(int changeScore)
         {
             _score += changeScore;
-            _scoreText.text = _score.ToString();
+            _scoreView.SetScore(_score);
         }
 
         private void Awake()
         {
             _spawner.OnDestroyObject += CheckDestroyObject;
             _score = 0;
-            _scoreText.text = _score.ToString();
+            _scoreView.SetScore(_score);
         }
 
         private void OnDestroy()
@@ -32,13 +41,13 @@ namespace Madhouse.ADHD
         private void CheckDestroyObject(ShapeTypes form, ShapeColors color, InteractionEndTypes interactionEnd)
         {
             if (CheckCompledTask(_taskController.TaskChoosen.WrongTask, form, color, interactionEnd))
-                _score -= 2;
-            if (CheckCompledTask(_taskController.TaskChoosen.FirstTask, form, color, interactionEnd))
-                _score += 2;
-            if (CheckCompledTask(_taskController.TaskChoosen.SecondTask, form, color, interactionEnd))
-                _score += 1;
+                _score -= _removeScoreForWrongTask;
+            else if (CheckCompledTask(_taskController.TaskChoosen.FirstTask, form, color, interactionEnd))
+                _score += _addScoreForFirstTask;
+            else if (CheckCompledTask(_taskController.TaskChoosen.SecondTask, form, color, interactionEnd))
+                _score += _addScoreForSecondTask;
 
-            _scoreText.text = _score.ToString();
+            _scoreView.SetScore(_score);
         }
 
         private bool CheckCompledTask(Task task, ShapeTypes form, ShapeColors color, InteractionEndTypes interactionEnd)

@@ -3,31 +3,35 @@ using UnityEngine;
 
 namespace Madhouse.ADHD
 {
+    /// <summary>
+    /// Контроллер для специальных фигур.
+    /// </summary>
     public class SpecialShapeController : MonoBehaviour
     {
+        /// <summary>
+        /// Событие конца итерации с игроком фигурой.
+        /// </summary>
         public event Action<InteractionEndTypes, SpecialShapeTypes> OnEndInteraction = delegate { };
 
-        public SpecialShapeTypes Type => _type;
-
         [SerializeField] private ShapeInteraction _shapeInteraction;
-        [SerializeField] private SpecialShapeData _specialShapeData;
-        [SerializeField] private SpriteRenderer _spriteShape;
-
+        [SerializeField] private SpecialShapeView _shapeView;
         private SpecialShapeTypes _type;
 
+        /// <summary>
+        /// Тип специальной фигуры.
+        /// </summary>
+        public SpecialShapeTypes Type => _type;
+
+        /// <summary>
+        /// Инициализация специальной фигуры.
+        /// </summary>
+        /// <param name="shape"></param>
         public void Init(SpecialShapeTypes shape)
         {
             _type = shape;
             _shapeInteraction.OnInteractEnd += EndInteraction;
 
-            for (int i = 0; i < _specialShapeData.SpacialShapes.Count; i++)
-            {
-                if (_specialShapeData.SpacialShapes[i].Type == _type)
-                {
-                    _spriteShape.sprite = _specialShapeData.SpacialShapes[i].Picture;
-                    break;
-                }
-            }
+            _shapeView.ShowType(shape);
         }
 
         private void EndInteraction(InteractionEndTypes interactionEndType)

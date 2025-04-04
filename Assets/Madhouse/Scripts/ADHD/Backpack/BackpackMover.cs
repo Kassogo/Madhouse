@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace Madhouse.ADHD
 {
+    /// <summary>
+    /// Класс движения рюкзака.
+    /// </summary>
     public class BackpackMover : MonoBehaviour
     {
         [SerializeField] private float _speed = 10f;
@@ -13,24 +16,9 @@ namespace Madhouse.ADHD
         private float _minChangeDistance = 0.001f;
         private float _offset = 1f;
 
-        private void Awake()
-        {
-            _leftPoint = Camera.main.ViewportToWorldPoint(Vector2.zero);
-            _rightPoint = Camera.main.ViewportToWorldPoint(new Vector2(1, 0));
+        private void Awake() => SetPoints();
 
-            _leftPoint.x += _offset;
-            _leftPoint.y += _offset;
-            _leftPoint.z = transform.position.z;
-
-            _rightPoint.x -= _offset;
-            _rightPoint.y += _offset;
-            _rightPoint.z = transform.position.z;
-        }
-
-        private void Update()
-        {
-            Move();
-        }
+        private void Update() => Move();
 
         private void Move()
         {
@@ -40,6 +28,20 @@ namespace Madhouse.ADHD
                 _isMoveRight = !_isMoveRight;
             
             transform.position = _newPosition;
+        }
+
+        private void SetPoints()
+        {
+            _leftPoint = Camera.main.ViewportToWorldPoint(Vector2.zero);
+            _rightPoint = Camera.main.ViewportToWorldPoint(Vector2.right);
+
+            _leftPoint.x += _offset;
+            _leftPoint.y += _offset;
+            _leftPoint.z = transform.position.z;
+
+            _rightPoint.x -= _offset;
+            _rightPoint.y += _offset;
+            _rightPoint.z = transform.position.z;
         }
     }
 }

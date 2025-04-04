@@ -3,11 +3,15 @@ using UnityEngine;
 
 namespace Madhouse.ADHD
 {
+    /// <summary>
+    /// Класс-компонент, отвечающий за взаимодействие игрока с фигурой.
+    /// </summary>
     public class ShapeInteraction : MonoBehaviour
     {
+        /// <summary>
+        /// Событие конца взаимодействия игрока с фигурой.
+        /// </summary>
         public event Action<InteractionEndTypes> OnInteractEnd = delegate { };
-
-        public bool IsInteraction => _isInteraction;
 
         [SerializeField] private LayerMask _layerMaskBackpack;
 
@@ -25,6 +29,11 @@ namespace Madhouse.ADHD
         private int _countShakeDo;
 
         private bool _isInteraction;
+
+        /// <summary>
+        /// Взаимодействует ли игрок с фигурой сейчас
+        /// </summary>
+        public bool IsInteraction => _isInteraction;
 
         private void Awake()
         {

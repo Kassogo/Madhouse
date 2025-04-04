@@ -4,14 +4,12 @@ using UnityEngine;
 
 namespace Madhouse.ADHD
 {
+    /// <summary>
+    /// Контроллер системы заданий.
+    /// </summary>
     public class TaskController : MonoBehaviour
     {
-        public TaskModel TaskChoosen => _tasksData.Tasks[_indexChooseTask];
-
-        public SpecialShapeTypes ChooseSpecialShape => _chooseSpecialShape;
-        public InteractionEndTypes ChooseInteractionForSpecialShape => _chooseInteractionFoeSpecialShape;
-
-        [SerializeField] private Spawner _spawner;
+        [SerializeField] private ShapesController _spawner;
         [SerializeField] private TasksData _tasksData;
         [SerializeField] private TaskView _taskView;
         [SerializeField] private float _minTimeChangeTask = 8;
@@ -25,6 +23,21 @@ namespace Madhouse.ADHD
         private SpecialShapeTypes _chooseSpecialShape;
         private InteractionEndTypes _chooseInteractionFoeSpecialShape;
 
+        /// <summary>
+        /// Актуальное задание.
+        /// </summary>
+        public TaskModel TaskChoosen => _tasksData.Tasks[_indexChooseTask];
+
+        /// <summary>
+        /// Выбранный тип специальной фигуры.
+        /// </summary>
+        public SpecialShapeTypes ChooseSpecialShape => _chooseSpecialShape;
+
+        /// <summary>
+        /// Выбранный тип взаимодействия со специальной фигурой.
+        /// </summary>
+        public InteractionEndTypes ChooseInteractionForSpecialShape => _chooseInteractionFoeSpecialShape;
+
         private void Awake()
         {
             _indexChooseTask = Random.Range(0, _tasksData.Tasks.Count);
@@ -32,7 +45,7 @@ namespace Madhouse.ADHD
             StartCoroutine(ChangeTask());
 
             _correctSpecialTypes = new();
-            for(int i = 0; i < System.Enum.GetValues(typeof(SpecialShapeTypes)).Length; i+=2)
+            for (int i = 0; i < System.Enum.GetValues(typeof(SpecialShapeTypes)).Length; i += 2)
                 _correctSpecialTypes.Add(i);
             StartCoroutine(StartSpecialTask());
             _spawner.OnDestroySpecialObject += SpecialShapeInteract;
@@ -62,7 +75,7 @@ namespace Madhouse.ADHD
             _chooseSpecialShape = (SpecialShapeTypes)_correctSpecialTypes[Random.Range(0, _correctSpecialTypes.Count)];
             _taskView.ShowSpecialTask(_chooseInteractionFoeSpecialShape, _chooseSpecialShape);
             _spawner.CreateSpecialShape(_chooseSpecialShape);
-            
+
             StartCoroutine(StartSpecialTask());
         }
 

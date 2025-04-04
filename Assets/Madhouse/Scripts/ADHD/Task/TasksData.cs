@@ -3,11 +3,17 @@ using UnityEngine;
 
 namespace Madhouse.ADHD
 {
+    /// <summary>
+    /// Контейнер задач.
+    /// </summary>
     [CreateAssetMenu(fileName = "TasksData", menuName = "Madhouse/ADHD/TasksData")]
     public class TasksData : ScriptableObject
     {
-        public List<TaskModel> Tasks => _tasks;
-
         [SerializeField] private List<TaskModel> _tasks;
+
+        /// <summary>
+        /// Задачи.
+        /// </summary>
+        public List<TaskModel> Tasks => _tasks;
     }
 }

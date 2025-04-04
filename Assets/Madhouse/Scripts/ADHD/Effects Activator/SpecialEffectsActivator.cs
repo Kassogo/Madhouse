@@ -3,9 +3,12 @@ using UnityEngine;
 
 namespace Madhouse.ADHD
 {
+    /// <summary>
+    /// Класс включающий эффекты после взаимодействия с специальными объектами.
+    /// </summary>
     public class SpecialEffectsActivator : MonoBehaviour
     {
-        [SerializeField] private Spawner _spawner;
+        [SerializeField] private ShapesController _spawner;
         [SerializeField] private TaskController _taskController;
         [SerializeField] private ScoreController _scoreController;
         [Space]

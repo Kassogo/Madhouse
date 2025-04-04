@@ -4,6 +4,9 @@ using TMPro;
 
 namespace Madhouse.ADHD
 {
+    /// <summary>
+    /// Р’СЊСЋС€РєР° Р·Р°РґР°С‡.
+    /// </summary>
     public class TaskView : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _textFirstTask;
@@ -13,25 +16,37 @@ namespace Madhouse.ADHD
         [SerializeField] private TextMeshProUGUI _textSpecialTask;
         [SerializeField] private GameObject _panelSpecialTask;
 
-        private string[] _nameColors = {"Красные", "Синие", "Желтые", "Зелёные", "Фиолетовые"};
-        private string[] _nameForms = {"Круги", "Треугольники", "Квадраты", "Трапеции", "Ромбы"};
-        private string[] _nameInteractions = {"Лопнуть", "Забрать", "Зажать", "Потрясти"};
-        private Dictionary<SpecialShapeTypes, string> _nameSpecialTypes 
-            = new Dictionary<SpecialShapeTypes, string> { { SpecialShapeTypes.CorrectBomb, "Бомбу" }, { SpecialShapeTypes.SlowerTime, "Таймер" }, { SpecialShapeTypes.IncreaseScore, "Монетку" } };
+        private readonly string[] _nameColors = {"РљСЂР°СЃРЅС‹Рµ", "РЎРёРЅРёРµ", "Р–РµР»С‚С‹Рµ", "Р—РµР»С‘РЅС‹Рµ", "Р¤РёРѕР»РµС‚РѕРІС‹Рµ"};
+        private readonly string[] _nameForms = {"РљСЂСѓРіРё", "РўСЂРµСѓРіРѕР»СЊРЅРёРєРё", "РљРІР°РґСЂР°С‚С‹", "РўСЂР°РїРµС†РёРё", "Р РѕРјР±С‹"};
+        private readonly string[] _nameInteractions = {"Р›РѕРїРЅСѓС‚СЊ", "Р—Р°Р±СЂР°С‚СЊ", "Р—Р°Р¶Р°С‚СЊ", "РџРѕС‚СЂСЏСЃС‚Рё"};
+        private readonly Dictionary<SpecialShapeTypes, string> _nameSpecialTypes 
+            = new Dictionary<SpecialShapeTypes, string> { { SpecialShapeTypes.CorrectBomb, "Р‘РѕРјР±Сѓ" }, { SpecialShapeTypes.SlowerTime, "РўР°Р№РјРµСЂ" }, { SpecialShapeTypes.IncreaseScore, "РњРѕРЅРµС‚РєСѓ" } };
 
+        /// <summary>
+        /// РџРѕРєР°Р· Р·Р°РґР°С‡.
+        /// </summary>
+        /// <param name="task"></param>
         public void ShowTasks(TaskModel task)
         {
             _textFirstTask.text = TaskConvertToString(task.FirstTask);
             _textSecondTask.text = TaskConvertToString(task.SecondTask);
-            _textWrongTask.text = "Нельзя: " + TaskConvertToString(task.WrongTask);
+            _textWrongTask.text = "РќРµР»СЊР·СЏ: " + TaskConvertToString(task.WrongTask);
         }
 
+        /// <summary>
+        /// РџРѕРєР°Р· СЃРїРµС†РёР°Р»СЊРЅС‹С… Р·Р°РґР°С‡.
+        /// </summary>
+        /// <param name="interactionEndTypes"></param>
+        /// <param name="specialShapeTypes"></param>
         public void ShowSpecialTask(InteractionEndTypes interactionEndTypes, SpecialShapeTypes specialShapeTypes)
         {
             _panelSpecialTask.SetActive(true);
             _textSpecialTask.text = _nameInteractions[(int)interactionEndTypes] + " " + _nameSpecialTypes[specialShapeTypes];
         }
 
+        /// <summary>
+        /// РЈР±СЂР°С‚СЊ РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ СЃРїРµС†РёР°Р»СЊРЅС‹С… Р·Р°РґР°С‡.
+        /// </summary>
         public void RemoveSpecialTask()
         {
             _panelSpecialTask.SetActive(false);
