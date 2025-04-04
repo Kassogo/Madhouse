@@ -33,6 +33,8 @@ namespace Madhouse.BipolarDisorder
         {
             _score += isMatch ? 1 : -1;
             OnScoreChanged?.Invoke(_score);
+
+            FindObjectOfType<BackgroundManager>()?.UpdateScore(_score);
         }
     }
 }

@@ -45,6 +45,7 @@ namespace Madhouse.BipolarDisorder
         private void GameOver()
         {
             Debug.Log("Game Over!");
+            FindObjectOfType<BackgroundManager>().OnLifeLost();
             // Здесь можно добавить логику перезапуска уровня или выхода в главное меню
         }
     }
