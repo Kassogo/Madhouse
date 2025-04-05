@@ -8,7 +8,7 @@ namespace Madhouse.ADHD
     public class ScoreController : MonoBehaviour
     {
         [SerializeField] private TaskController _taskController;
-        [SerializeField] private ShapesController _spawner;
+        [SerializeField] private ShapesDispatcher _spawner;
         [SerializeField] private ScoreView _scoreView;
         [SerializeField] private int _addScoreForFirstTask = 2;
         [SerializeField] private int _addScoreForSecondTask = 1;
@@ -40,6 +40,9 @@ namespace Madhouse.ADHD
 
         private void CheckDestroyObject(ShapeTypes form, ShapeColors color, InteractionEndTypes interactionEnd)
         {
+            if (interactionEnd == InteractionEndTypes.None)
+                return;
+
             if (CheckCompledTask(_taskController.TaskChoosen.WrongTask, form, color, interactionEnd))
                 _score -= _removeScoreForWrongTask;
             else if (CheckCompledTask(_taskController.TaskChoosen.FirstTask, form, color, interactionEnd))

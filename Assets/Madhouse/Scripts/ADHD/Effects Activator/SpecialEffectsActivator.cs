@@ -8,7 +8,7 @@ namespace Madhouse.ADHD
     /// </summary>
     public class SpecialEffectsActivator : MonoBehaviour
     {
-        [SerializeField] private ShapesController _spawner;
+        [SerializeField] private ShapesDispatcher _spawner;
         [SerializeField] private TaskController _taskController;
         [SerializeField] private ScoreController _scoreController;
         [Space]
@@ -46,8 +46,8 @@ namespace Madhouse.ADHD
                     DeleteShape(_taskController.TaskChoosen.WrongTask);
                     break;
                 case SpecialShapeTypes.WrongBomb:
-                    DeleteShape(_taskController.TaskChoosen.FirstTask, false);
-                    DeleteShape(_taskController.TaskChoosen.SecondTask, false);
+                    DeleteShape(_taskController.TaskChoosen.FirstTask);
+                    DeleteShape(_taskController.TaskChoosen.SecondTask);
                     break;
                 case SpecialShapeTypes.IncreaseScore:
                     _scoreController.ChangeScore(_scoreChange);
@@ -64,20 +64,20 @@ namespace Madhouse.ADHD
             }
         }
 
-        private void DeleteShape(Task task, bool isAllDelete = true)
+        private void DeleteShape(Task task)
         {
             switch (task.Type)
             {
                 case TaskType.Color:
                 case TaskType.InteractionAndColor:
-                    _spawner.DeleteShape(task.ShapeColor, isAllDelete);
+                    _spawner.DeleteShape(task.ShapeColor);
                     break;
                 case TaskType.Form:
                 case TaskType.InteractionAndForm:
-                    _spawner.DeleteShape(task.Form, isAllDelete);
+                    _spawner.DeleteShape(task.Form);
                     break;
                 case TaskType.ColorAndForm:
-                    _spawner.DeleteShape(task.Form, task.ShapeColor, isAllDelete);
+                    _spawner.DeleteShape(task.Form, task.ShapeColor);
                     break;
             }
         }

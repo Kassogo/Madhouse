@@ -9,7 +9,7 @@ namespace Madhouse.ADHD
     /// </summary>
     public class TaskController : MonoBehaviour
     {
-        [SerializeField] private ShapesController _spawner;
+        [SerializeField] private ShapesDispatcher _spawner;
         [SerializeField] private TasksData _tasksData;
         [SerializeField] private TaskView _taskView;
         [SerializeField] private float _minTimeChangeTask = 8;

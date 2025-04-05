@@ -22,6 +22,7 @@ namespace Madhouse.ADHD
         private ShapeTypes _shapeType;
         private ShapeColors _color;
         private InteractionEndTypes _endtype;
+        private Coroutine _coroutineDeath;
 
         /// <summary>
         /// Тип фигуры.
@@ -50,10 +51,18 @@ namespace Madhouse.ADHD
             _color = color;
 
             _shapeView.ShowType(_shapeType, _color);
+            _coroutineDeath = StartCoroutine(OverUsed());
+        }
+
+        private void OnDisable()
+        {
+            if (_coroutineDeath != null)
+                StopCoroutine(_coroutineDeath);
         }
 
         private void HaveEndInteraction(InteractionEndTypes interaction)
         {
+            StopCoroutine(_coroutineDeath);
             _shapeInteraction.OnInteractEnd -= HaveEndInteraction;
             _endtype = interaction;
             OnEnd.Invoke(this);
