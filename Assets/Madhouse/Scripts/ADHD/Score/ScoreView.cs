@@ -14,7 +14,7 @@ namespace Madhouse.ADHD
         /// Показ счёта.
         /// </summary>
         /// <param name="score"></param>
-        public void SetScore(int score)
+        public void ShowScore(int score)
         {
             _scoreText.text = score.ToString();
         }

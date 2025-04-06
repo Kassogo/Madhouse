@@ -50,10 +50,10 @@ namespace Madhouse.ADHD
                     DeleteShape(_taskController.TaskChoosen.SecondTask);
                     break;
                 case SpecialShapeTypes.IncreaseScore:
-                    _scoreController.ChangeScore(_scoreChange);
+                    _scoreController.AddScore(_scoreChange);
                     break;
                 case SpecialShapeTypes.DecreaseScore:
-                    _scoreController.ChangeScore(-_scoreChange);
+                    _scoreController.AddScore(-_scoreChange);
                     break;
                 case SpecialShapeTypes.SlowerTime:
                     StartCoroutine(ChangeTime(true));

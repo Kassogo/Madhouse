@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Madhouse.ADHD
 {
@@ -9,6 +11,8 @@ namespace Madhouse.ADHD
     /// </summary>
     public class TaskController : MonoBehaviour
     {
+        public event Action OnChangeTask = delegate { };
+
         [SerializeField] private ShapesDispatcher _spawner;
         [SerializeField] private TasksData _tasksData;
         [SerializeField] private TaskView _taskView;
@@ -63,6 +67,9 @@ namespace Madhouse.ADHD
             else
                 _indexChooseTask = Random.Range(_tasksData.Tasks.Count / 2, _tasksData.Tasks.Count);
             _taskView.ShowTasks(TaskChoosen);
+
+            OnChangeTask.Invoke();
+
             yield return new WaitForSeconds(Random.Range(_minTimeChangeTask, _maxTimeChangeTask));
             StartCoroutine(ChangeTask());
         }

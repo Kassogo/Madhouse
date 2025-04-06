@@ -19,6 +19,12 @@ namespace Madhouse.ADHD
         /// <param name="color"></param>
         public void ShowType(ShapeTypes shape, ShapeColors color)
         {
+            SetSprite(shape);
+            SetColor(color);
+        }
+
+        private void SetSprite(ShapeTypes shape)
+        {
             for (int i = 0; i < _shapesData.Shapes.Count; i++)
             {
                 if (_shapesData.Shapes[i].Type == shape)
@@ -28,7 +34,10 @@ namespace Madhouse.ADHD
                     break;
                 }
             }
+        }
 
+        private void SetColor(ShapeColors color)
+        {
             for (int i = 0; i < _colorsData.Colors.Count; i++)
             {
                 if (_colorsData.Colors[i].ColorType == color)

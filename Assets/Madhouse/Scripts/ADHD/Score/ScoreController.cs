@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 namespace Madhouse.ADHD
 {
@@ -7,12 +8,15 @@ namespace Madhouse.ADHD
     /// </summary>
     public class ScoreController : MonoBehaviour
     {
+        public event Action<int> OnChangeScore;
+
         [SerializeField] private TaskController _taskController;
         [SerializeField] private ShapesDispatcher _spawner;
         [SerializeField] private ScoreView _scoreView;
         [SerializeField] private int _addScoreForFirstTask = 2;
         [SerializeField] private int _addScoreForSecondTask = 1;
         [SerializeField] private int _removeScoreForWrongTask = 2;
+        [SerializeField] private int _removeScoreAfterChangeTask = 1;
 
         private int _score;
 
@@ -20,22 +24,22 @@ namespace Madhouse.ADHD
         /// Изменение счёта.
         /// </summary>
         /// <param name="changeScore"></param>
-        public void ChangeScore(int changeScore)
+        public void AddScore(int changeScore)
         {
-            _score += changeScore;
-            _scoreView.SetScore(_score);
+            _scoreView.ShowScore(_score + changeScore);
         }
 
-        private void Awake()
+        private void Start()
         {
             _spawner.OnDestroyObject += CheckDestroyObject;
-            _score = 0;
-            _scoreView.SetScore(_score);
+            _taskController.OnChangeTask += DecreaseScore;
+            SetScore(0);
         }
 
         private void OnDestroy()
         {
             _spawner.OnDestroyObject -= CheckDestroyObject;
+            _taskController.OnChangeTask -= DecreaseScore;
         }
 
         private void CheckDestroyObject(ShapeTypes form, ShapeColors color, InteractionEndTypes interactionEnd)
@@ -44,13 +48,11 @@ namespace Madhouse.ADHD
                 return;
 
             if (CheckCompledTask(_taskController.TaskChoosen.WrongTask, form, color, interactionEnd))
-                _score -= _removeScoreForWrongTask;
+                SetScore(_score - _removeScoreForWrongTask);
             else if (CheckCompledTask(_taskController.TaskChoosen.FirstTask, form, color, interactionEnd))
-                _score += _addScoreForFirstTask;
+                SetScore(_score + _addScoreForFirstTask);
             else if (CheckCompledTask(_taskController.TaskChoosen.SecondTask, form, color, interactionEnd))
-                _score += _addScoreForSecondTask;
-
-            _scoreView.SetScore(_score);
+                SetScore(_score + _addScoreForSecondTask);
         }
 
         private bool CheckCompledTask(Task task, ShapeTypes form, ShapeColors color, InteractionEndTypes interactionEnd)
@@ -72,6 +74,18 @@ namespace Madhouse.ADHD
                 default:
                     return false;
             }
+        }
+
+        private void SetScore(int score)
+        {
+            _score = score;
+            _scoreView.ShowScore(_score);
+            OnChangeScore.Invoke(_score);
+        }
+
+        private void DecreaseScore()
+        {
+            SetScore(_score - _removeScoreAfterChangeTask);
         }
     }
 }

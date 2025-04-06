@@ -59,14 +59,9 @@ namespace Madhouse.ADHD
 
         private void Awake()
         {
-            _spawnPoint = Camera.main.ViewportToWorldPoint(new Vector2(0, 0.5f));
-            _spawnPoint.x -= 1;
-            _spawnPoint.z = 0;
+            CalculatingPointOfSpawn();
 
-            _shapesPool = new ShapesPool(_shapePrefab, _countShape);
-            _shapesPool.OnUseShape += UseShape;
-            _specialShapePool = new SpecialShapePool(_specialShapePrefab);
-            _specialShapePool.OnUseSpecialObject += UseSpecialShape;
+            InitializingPoolObjects();
 
             for (int i = 0; i < _StartCountShape; i++)
                 CreatedShape();
@@ -82,6 +77,26 @@ namespace Madhouse.ADHD
         }
 
         private void OnDisable()
+        {
+            DeinitializationPoolObjects();
+        }
+
+        private void CalculatingPointOfSpawn()
+        {
+            _spawnPoint = Camera.main.ViewportToWorldPoint(new Vector2(0, 0.5f));
+            _spawnPoint.x -= 1;
+            _spawnPoint.z = 0;
+        }
+
+        private void InitializingPoolObjects()
+        {
+            _shapesPool = new ShapesPool(_shapePrefab, _countShape);
+            _shapesPool.OnUseShape += UseShape;
+            _specialShapePool = new SpecialShapePool(_specialShapePrefab);
+            _specialShapePool.OnUseSpecialObject += UseSpecialShape;
+        }
+
+        private void DeinitializationPoolObjects()
         {
             _specialShapePool.OnUseSpecialObject -= UseSpecialShape;
             _shapesPool.OnUseShape -= UseShape;
