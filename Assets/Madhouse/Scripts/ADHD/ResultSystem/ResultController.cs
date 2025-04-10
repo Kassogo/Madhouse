@@ -8,6 +8,7 @@ namespace Madhouse.ADHD
     public class ResultController : MonoBehaviour
     {
         [SerializeField] private ScoreController _scoreController;
+        [SerializeField] private PauseMenuController _pauseMenu;
         [SerializeField] private ResultView _resultView;
         [SerializeField] private ResultModel _resultModel;
 
@@ -24,9 +25,15 @@ namespace Madhouse.ADHD
         private void CheckScore(int score)
         {
             if (score >= _resultModel.WinScore)
+            {
+                _pauseMenu.ShowPauseMenuForEndGame();
                 _resultView.ShowWinWindow();
+            }
             else if (score <= _resultModel.LoseScore)
+            {
+                _pauseMenu.ShowPauseMenuForEndGame();
                 _resultView.ShowLoseWindow();
+            }
 
             CalculatingProximityToLoss(score);
         }

@@ -8,7 +8,7 @@ namespace Madhouse.ADHD
     /// </summary>
     public class ScoreController : MonoBehaviour
     {
-        public event Action<int> OnChangeScore;
+        public event Action<int> OnChangeScore = delegate { };
 
         [SerializeField] private TaskController _taskController;
         [SerializeField] private ShapesDispatcher _spawner;

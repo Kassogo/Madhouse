@@ -16,12 +16,12 @@ namespace Madhouse.ADHD
         [SerializeField] private float _timeEffect = 6;
         [SerializeField] private float _timeCoefficientChange = 0.2f;
 
-        private WaitForSeconds _waitForChangeTime;
+        private WaitForSecondsRealtime _waitForChangeTime;
 
         private void Awake()
         {
             _spawner.OnDestroySpecialObject += CheckDestroySpecialShape;
-            _waitForChangeTime = new WaitForSeconds(_timeEffect);
+            _waitForChangeTime = new WaitForSecondsRealtime(_timeEffect);
         }
 
         private void OnDestroy()
@@ -84,7 +84,7 @@ namespace Madhouse.ADHD
 
         private IEnumerator ChangeTime(bool isSlower)
         {
-            Time.timeScale += isSlower ? -_timeCoefficientChange : _timeCoefficientChange;
+            Time.timeScale = isSlower ? _timeCoefficientChange : Time.timeScale + _timeCoefficientChange;
             yield return _waitForChangeTime;
             Time.timeScale = 1;
         }

@@ -80,6 +80,7 @@ namespace Madhouse.ADHD
 
             _chooseInteractionFoeSpecialShape = (InteractionEndTypes)Random.Range(0, System.Enum.GetValues(typeof(InteractionEndTypes)).Length - 1);
             _chooseSpecialShape = (SpecialShapeTypes)_correctSpecialTypes[Random.Range(0, _correctSpecialTypes.Count)];
+
             _taskView.ShowSpecialTask(_chooseInteractionFoeSpecialShape, _chooseSpecialShape);
             _spawner.CreateSpecialShape(_chooseSpecialShape);
 

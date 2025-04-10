@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace Madhouse.ADHD
 {
@@ -8,8 +9,9 @@ namespace Madhouse.ADHD
     /// </summary>
     public class ResultView : MonoBehaviour
     {
-        [SerializeField] private GameObject _winWindow;
-        [SerializeField] private GameObject _loseWindow;
+        [SerializeField] private TextMeshProUGUI _textResult;
+        [SerializeField] private string _winText;
+        [SerializeField] private string _loseText;
         [SerializeField] private Image _blackVeil;
 
         private Color _colorVeil;
@@ -17,15 +19,20 @@ namespace Madhouse.ADHD
         /// <summary>
         /// Показ экрана победы.
         /// </summary>
-        public void ShowWinWindow() => _winWindow.SetActive(true);
+        public void ShowWinWindow()
+        {
+            _textResult.gameObject.SetActive(true);
+            _textResult.text = _winText;
+        }
 
         /// <summary>
         /// Показ экрана проигрыша.
         /// </summary>
         public void ShowLoseWindow()
         {
-            _loseWindow.SetActive(true);
+            _textResult.gameObject.SetActive(true);
             _blackVeil.gameObject.SetActive(false);
+            _textResult.text = _loseText;
         }
 
         /// <summary>
