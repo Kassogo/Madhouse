@@ -1,23 +1,23 @@
 using UnityEngine;
 
+/// <summary>
+/// Manages the background color based on the player's score and life status.
+/// The color transitions from dark gray to white as the score increases,
+/// and darkens temporarily when the player loses a life.
+/// </summary>
 public class BackgroundManager : MonoBehaviour
 {
-    [SerializeField] private Camera _camera; // ≈сли фон через камеру
+    [SerializeField] private Camera _camera;
     [SerializeField] private Color _startColor = Color.gray;
     [SerializeField] private Color _endColor = Color.white;
-    [SerializeField] private float _maxScore = 100f; // ѕри каком количестве очков фон станет светлым
-    [SerializeField] private float _darkenAmount = 0.3f; // Ќасколько темнее становитс€ фон при потере жизни
+    [SerializeField] private float _maxScore = 100f; 
+    [SerializeField] private float _darkenAmount = 0.3f; 
 
     private float _currentScore = 0;
     private float _currentDarkness = 0;
 
     private void Start()
     {
-        if (_camera == null)
-        {
-            _camera = Camera.main;
-        }
-
         _camera.backgroundColor = _startColor;
     }
 

@@ -1,6 +1,5 @@
 using UnityEngine;
 using System;
-using System.Text.RegularExpressions;
 
 namespace Madhouse.BipolarDisorder
 {
@@ -10,6 +9,7 @@ namespace Madhouse.BipolarDisorder
     public class LifeManager : MonoBehaviour
     {
         public static LifeManager Instance { get; private set; }
+        public int Lives => _lives;
 
         private int _lives = 3;
         public event Action<int> OnLivesChanged;
@@ -30,23 +30,18 @@ namespace Madhouse.BipolarDisorder
         public void LoseLife()
         {
             _lives--;
-            
-            Debug.Log($"Lives left: {_lives}");
-            OnLivesChanged?.Invoke(_lives);
 
-            if (_lives <= 0)
+            OnLivesChanged?.Invoke(Lives);
+
+            if (Lives <= 0)
             {
                 GameOver();
             }
         }
 
-        public int GetLives() => _lives;
-
         private void GameOver()
-        {
-            Debug.Log("Game Over!");
-            FindObjectOfType<BackgroundManager>().OnLifeLost();
-            // Здесь можно добавить логику перезапуска уровня или выхода в главное меню
+        {    
+            FindObjectOfType<BackgroundManager>().OnLifeLost();        
         }
     }
 }

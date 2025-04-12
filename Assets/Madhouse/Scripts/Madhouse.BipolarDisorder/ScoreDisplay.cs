@@ -12,27 +12,18 @@ namespace Madhouse.BipolarDisorder
 
         private void Awake()
         {
-            _scoreText = GetComponent<TextMeshProUGUI>();
-            if (_scoreText == null)
+            if (_scoreText == null && !TryGetComponent(out _scoreText))
             {
-                Debug.LogError("TextMeshProUGUI component not found on this GameObject!");
-            }
-            else
-            {
-                Debug.Log("TextMeshProUGUI component found.");
+                Debug.LogError("ScoreDisplay: TextMeshProUGUI is not assigned and not found!");
             }
         }
 
         private void Start()
         {
-
-            if (ScoreManager.Instance == null)
-            {
-                return;
-            }
+            if (ScoreManager.Instance == null) return;
 
             ScoreManager.Instance.OnScoreChanged += UpdateScoreText;
-            UpdateScoreText(ScoreManager.Instance._score); 
+            UpdateScoreText(ScoreManager.Instance._score);
         }
 
         private void OnDestroy()

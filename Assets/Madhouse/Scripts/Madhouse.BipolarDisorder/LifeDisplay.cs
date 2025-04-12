@@ -19,7 +19,7 @@ namespace Madhouse.BipolarDisorder
             }
 
             LifeManager.Instance.OnLivesChanged += UpdateLivesText;
-            UpdateLivesText(LifeManager.Instance.GetLives());
+            UpdateLivesText(LifeManager.Instance.Lives);
         }
 
         private void OnDestroy()

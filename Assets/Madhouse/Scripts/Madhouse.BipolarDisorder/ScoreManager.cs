@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 namespace Madhouse.BipolarDisorder
 {
@@ -9,9 +10,17 @@ namespace Madhouse.BipolarDisorder
     {
         public static ScoreManager Instance { get; private set; }
         public int _score = 0;
-        public event System.Action<int> OnScoreChanged;
+        public event Action<int> OnScoreChanged;
 
         private void Awake()
+        {
+            InitializeSingleton();
+        }
+
+        /// <summary>
+        /// Ensures this class follows the Singleton pattern.
+        /// </summary>
+        private void InitializeSingleton()
         {
             if (Instance == null)
             {
@@ -21,7 +30,6 @@ namespace Madhouse.BipolarDisorder
             else
             {
                 Destroy(gameObject);
-                return;
             }
         }
 
