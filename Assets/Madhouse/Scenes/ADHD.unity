@@ -2322,9 +2322,9 @@ MonoBehaviour:
   _spawner: {fileID: 1519475927}
   _tasksData: {fileID: 11400000, guid: efcf3eb706b4eee44a04bbe4ead808d9, type: 2}
   _taskView: {fileID: 1733127511}
-  _minTimeChangeTask: 20
-  _maxTimeChangeTask: 40
-  _minTimeSpecialTask: 20
+  _minTimeChangeTask: 15
+  _maxTimeChangeTask: 20
+  _minTimeSpecialTask: 10
   _maxTimeSpecialTask: 30
 --- !u!4 &1623596249
 Transform:

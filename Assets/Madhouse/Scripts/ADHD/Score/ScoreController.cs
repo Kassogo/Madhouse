@@ -19,6 +19,7 @@ namespace Madhouse.ADHD
         [SerializeField] private int _removeScoreAfterChangeTask = 1;
 
         private int _score;
+        private bool _isMadeTask = false;
 
         /// <summary>
         /// Изменение счёта.
@@ -32,14 +33,14 @@ namespace Madhouse.ADHD
         private void Start()
         {
             _spawner.OnDestroyObject += CheckDestroyObject;
-            _taskController.OnChangeTask += DecreaseScore;
+            _taskController.OnChangeTask += CheckMadeTask;
             SetScore(0);
         }
 
         private void OnDestroy()
         {
             _spawner.OnDestroyObject -= CheckDestroyObject;
-            _taskController.OnChangeTask -= DecreaseScore;
+            _taskController.OnChangeTask -= CheckMadeTask;
         }
 
         private void CheckDestroyObject(ShapeTypes form, ShapeColors color, InteractionEndTypes interactionEnd)
@@ -50,9 +51,15 @@ namespace Madhouse.ADHD
             if (CheckCompledTask(_taskController.TaskChoosen.WrongTask, form, color, interactionEnd))
                 SetScore(_score - _removeScoreForWrongTask);
             else if (CheckCompledTask(_taskController.TaskChoosen.FirstTask, form, color, interactionEnd))
+            {
+                _isMadeTask = true;
                 SetScore(_score + _addScoreForFirstTask);
+            }
             else if (CheckCompledTask(_taskController.TaskChoosen.SecondTask, form, color, interactionEnd))
+            {
+                _isMadeTask = true;
                 SetScore(_score + _addScoreForSecondTask);
+            }
         }
 
         private bool CheckCompledTask(Task task, ShapeTypes form, ShapeColors color, InteractionEndTypes interactionEnd)
@@ -83,9 +90,11 @@ namespace Madhouse.ADHD
             OnChangeScore.Invoke(_score);
         }
 
-        private void DecreaseScore()
+        private void CheckMadeTask()
         {
-            SetScore(_score - _removeScoreAfterChangeTask);
+            if (!_isMadeTask)
+                SetScore(_score - _removeScoreAfterChangeTask);
+            _isMadeTask = false;
         }
     }
 }

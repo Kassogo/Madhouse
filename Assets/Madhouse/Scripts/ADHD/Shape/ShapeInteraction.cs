@@ -23,7 +23,7 @@ namespace Madhouse.ADHD
         private float _distanceToCamera;
         private float _timeInteraction;
         private float _timeForClick = 0.1f;
-        private float _timeForClamped = 1.5f;
+        private float _timeForClamped = 0.5f;
         private float _shakeDistance = 0.2f;
         private int _countShakeNeed = 6;
         private int _countShakeDo;

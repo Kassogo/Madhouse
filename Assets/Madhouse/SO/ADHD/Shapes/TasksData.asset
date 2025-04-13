@@ -40,7 +40,7 @@ MonoBehaviour:
       _shapeForm: 0
     _wrongTask:
       _taskType: 2
-      _interactionEnd: 3
+      _interactionEnd: 0
       _shapeColor: 0
       _shapeForm: 2
   - _firstTask:
@@ -235,6 +235,81 @@ MonoBehaviour:
       _shapeForm: 2
     _wrongTask:
       _taskType: 1
+      _interactionEnd: 0
+      _shapeColor: 0
+      _shapeForm: 4
+  - _firstTask:
+      _taskType: 1
+      _interactionEnd: 3
+      _shapeColor: 2
+      _shapeForm: 1
+    _secondTask:
+      _taskType: 0
+      _interactionEnd: 0
+      _shapeColor: 2
+      _shapeForm: 2
+    _wrongTask:
+      _taskType: 0
+      _interactionEnd: 0
+      _shapeColor: 0
+      _shapeForm: 4
+  - _firstTask:
+      _taskType: 4
+      _interactionEnd: 1
+      _shapeColor: 2
+      _shapeForm: 4
+    _secondTask:
+      _taskType: 1
+      _interactionEnd: 0
+      _shapeColor: 2
+      _shapeForm: 1
+    _wrongTask:
+      _taskType: 1
+      _interactionEnd: 0
+      _shapeColor: 0
+      _shapeForm: 0
+  - _firstTask:
+      _taskType: 3
+      _interactionEnd: 1
+      _shapeColor: 3
+      _shapeForm: 4
+    _secondTask:
+      _taskType: 1
+      _interactionEnd: 0
+      _shapeColor: 2
+      _shapeForm: 2
+    _wrongTask:
+      _taskType: 0
+      _interactionEnd: 0
+      _shapeColor: 0
+      _shapeForm: 0
+  - _firstTask:
+      _taskType: 4
+      _interactionEnd: 3
+      _shapeColor: 2
+      _shapeForm: 0
+    _secondTask:
+      _taskType: 0
+      _interactionEnd: 0
+      _shapeColor: 4
+      _shapeForm: 2
+    _wrongTask:
+      _taskType: 2
+      _interactionEnd: 0
+      _shapeColor: 0
+      _shapeForm: 4
+  - _firstTask:
+      _taskType: 0
+      _interactionEnd: 3
+      _shapeColor: 4
+      _shapeForm: 0
+    _secondTask:
+      _taskType: 2
+      _interactionEnd: 0
+      _shapeColor: 4
+      _shapeForm: 2
+    _wrongTask:
+      _taskType: 0
       _interactionEnd: 0
       _shapeColor: 0
       _shapeForm: 4
