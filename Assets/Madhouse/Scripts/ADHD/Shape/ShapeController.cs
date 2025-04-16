@@ -15,8 +15,8 @@ namespace Madhouse.ADHD
         public event Action<ShapeController> OnEnd = delegate { };
 
         [SerializeField] private ShapeInteraction _shapeInteraction;
-        [SerializeField] private float _minTimeOverTask = 8;
-        [SerializeField] private float _maxTimeOverTask = 15;
+        [SerializeField] private ShapeMove _shapeMove;
+        [SerializeField] private ShapeSetting _setting;
         [SerializeField] private ShapeView _shapeView;
 
         private ShapeTypes _shapeType;
@@ -54,6 +54,12 @@ namespace Madhouse.ADHD
             _coroutineDeath = StartCoroutine(OverUsed());
         }
 
+        private void Awake()
+        {
+            _shapeInteraction.Init(_setting);
+            _shapeMove.Init(_setting, _shapeInteraction);
+        }
+
         private void OnDisable()
         {
             if (_coroutineDeath != null)
@@ -70,7 +76,7 @@ namespace Madhouse.ADHD
 
         private IEnumerator OverUsed()
         {
-            yield return new WaitForSeconds(UnityEngine.Random.Range(_minTimeOverTask, _maxTimeOverTask));
+            yield return new WaitForSeconds(UnityEngine.Random.Range(_setting.MinTimeOverShape, _setting.MaxTimeOverShape));
             _endtype = InteractionEndTypes.None;
             OnEnd.Invoke(this);
         }

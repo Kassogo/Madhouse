@@ -14,7 +14,10 @@ namespace Madhouse.ADHD
         public event Action<InteractionEndTypes, SpecialShapeTypes> OnEndInteraction = delegate { };
 
         [SerializeField] private ShapeInteraction _shapeInteraction;
+        [SerializeField] private ShapeMove _shapeMove;
         [SerializeField] private SpecialShapeView _shapeView;
+        [SerializeField] private ShapeSetting _setting;
+
         private SpecialShapeTypes _type;
 
         /// <summary>
@@ -32,6 +35,12 @@ namespace Madhouse.ADHD
             _shapeInteraction.OnInteractEnd += EndInteraction;
 
             _shapeView.ShowType(shape);
+        }
+
+        private void Awake()
+        {
+            _shapeInteraction.Init(_setting);
+            _shapeMove.Init(_setting, _shapeInteraction);
         }
 
         private void EndInteraction(InteractionEndTypes interactionEndType)

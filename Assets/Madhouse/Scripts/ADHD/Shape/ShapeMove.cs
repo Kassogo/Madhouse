@@ -7,27 +7,30 @@ namespace Madhouse.ADHD
     /// </summary>
     public class ShapeMove : MonoBehaviour
     {
-        [SerializeField] private float _speed;
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private ShapeInteraction _shapeInteraction;
 
         private Vector2 _directionMove;
         private Vector3 _downLeftCamera;
         private Vector3 _topRightCamera;
-        private float _cooldownCheck = 0.5f;
         private float _timerCheck;
 
-        private void Awake()
+        private ShapeSetting _setting;
+
+        public void Init(ShapeSetting setting, ShapeInteraction shapeInteraction)
         {
+            _shapeInteraction = shapeInteraction;
+            _setting = setting;
             _topRightCamera = Camera.main.ViewportToWorldPoint(Vector3.one);
             _downLeftCamera = Camera.main.ViewportToWorldPoint(Vector3.zero);
             _directionMove = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
-            _timerCheck = Time.time + _cooldownCheck;
+            _timerCheck = Time.time + _setting.CooldownCheckBorders;
         }
+
 
         private void Update()
         {
-            if (_shapeInteraction.IsInteraction)
+            if (_shapeInteraction.IsInteraction || _setting == null)
                 return;
 
             if (_timerCheck < Time.time)
@@ -38,7 +41,7 @@ namespace Madhouse.ADHD
 
         private void Move()
         {
-            _rigidbody2D.velocity += _directionMove * _speed * Time.deltaTime;
+            _rigidbody2D.velocity += _directionMove * _setting.SpeedMove * Time.deltaTime;
         }
 
         private void ChangeDirection(bool isChangeX)
@@ -48,7 +51,7 @@ namespace Madhouse.ADHD
                 _directionMove.x = -_directionMove.x;
             else
                 _directionMove.y = -_directionMove.y;
-            _timerCheck = Time.time + _cooldownCheck;
+            _timerCheck = Time.time + _setting.CooldownCheckBorders;
         }
 
         private void CheckCollision()

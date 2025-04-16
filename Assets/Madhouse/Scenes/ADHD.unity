@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d70915d77ce4eff49a1b8bdfb74b422a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _backpackSettings: {fileID: 11400000, guid: 46d7ca04b2ae26c47ba1c965f5f7a465, type: 2}
 --- !u!1 &270013967
 GameObject:
   m_ObjectHideFlags: 0
@@ -1542,10 +1542,7 @@ MonoBehaviour:
   _taskController: {fileID: 1623596248}
   _spawner: {fileID: 1519475927}
   _scoreView: {fileID: 1122417620}
-  _addScoreForFirstTask: 2
-  _addScoreForSecondTask: 1
-  _removeScoreForWrongTask: 2
-  _removeScoreAfterChangeTask: 1
+  _setting: {fileID: 11400000, guid: cbc433dbe00b14147848a5fd2072bd9f, type: 2}
 --- !u!4 &1122417619
 Transform:
   m_ObjectHideFlags: 0
@@ -2288,8 +2285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shapePrefab: {fileID: 8742054820740634041, guid: 4f99eb51b237a5744b21da1baa3aacf6, type: 3}
   _specialShapePrefab: {fileID: 2973965656984072319, guid: ad483e6f1a86727489c8e128c6d20dac, type: 3}
-  _StartCountShape: 5
-  _countShape: 10
+  _setting: {fileID: 11400000, guid: e2861417df2cbb74987de1a3662e3a9e, type: 2}
 --- !u!1 &1623596247
 GameObject:
   m_ObjectHideFlags: 0
@@ -2322,10 +2318,7 @@ MonoBehaviour:
   _spawner: {fileID: 1519475927}
   _tasksData: {fileID: 11400000, guid: efcf3eb706b4eee44a04bbe4ead808d9, type: 2}
   _taskView: {fileID: 1733127511}
-  _minTimeChangeTask: 15
-  _maxTimeChangeTask: 20
-  _minTimeSpecialTask: 10
-  _maxTimeSpecialTask: 30
+  _setting: {fileID: 11400000, guid: 541ff8a737c04dd4abdd72e8837c6ced, type: 2}
 --- !u!4 &1623596249
 Transform:
   m_ObjectHideFlags: 0
@@ -2530,9 +2523,7 @@ MonoBehaviour:
   _spawner: {fileID: 1519475927}
   _taskController: {fileID: 1623596248}
   _scoreController: {fileID: 1122417618}
-  _scoreChange: 5
-  _timeEffect: 6
-  _timeCoefficientChange: 0.5
+  _setting: {fileID: 11400000, guid: 2440fe4221d96964ab900fbc56f036cb, type: 2}
 --- !u!4 &1792402059
 Transform:
   m_ObjectHideFlags: 0

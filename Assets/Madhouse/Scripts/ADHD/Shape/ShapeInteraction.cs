@@ -13,30 +13,26 @@ namespace Madhouse.ADHD
         /// </summary>
         public event Action<InteractionEndTypes> OnInteractEnd = delegate { };
 
-        [SerializeField] private LayerMask _layerMaskBackpack;
-
         private Vector3 _offset;
         private Vector3 _mousePosition;
         private Vector3 _oldPosition;
 
-        private float _rayDistance = 0.5f;
         private float _distanceToCamera;
         private float _timeInteraction;
-        private float _timeForClick = 0.1f;
-        private float _timeForClamped = 0.5f;
-        private float _shakeDistance = 0.2f;
-        private int _countShakeNeed = 6;
         private int _countShakeDo;
 
         private bool _isInteraction;
+
+        private ShapeSetting _setting;
 
         /// <summary>
         /// Взаимодействует ли игрок с фигурой сейчас
         /// </summary>
         public bool IsInteraction => _isInteraction;
 
-        private void Awake()
+        public void Init(ShapeSetting setting)
         {
+            _setting = setting;
             _distanceToCamera = Mathf.Abs(Camera.main.transform.position.z - transform.position.z);
         }
 
@@ -58,6 +54,9 @@ namespace Madhouse.ADHD
 
         private void Update()
         {
+            if (_setting == null)
+                return;
+
             CheckInteraction();
         }
 
@@ -82,19 +81,19 @@ namespace Madhouse.ADHD
 
         private void CheckEndInteraction()
         {
-            if (Physics2D.Raycast(transform.position, Vector2.down, _rayDistance, _layerMaskBackpack))
+            if (Physics2D.Raycast(transform.position, Vector2.down, _setting.RayDistanceCheck, _setting.LayerMaskBackpack))
             {
                 OnInteractEnd.Invoke(InteractionEndTypes.Taked);
             }
-            else if (_countShakeDo >= _countShakeNeed)
+            else if (_countShakeDo >= _setting.CountShakeNeed)
             {
                 OnInteractEnd.Invoke(InteractionEndTypes.Shaked);
             }
-            else if (_timeInteraction >= _timeForClamped)
+            else if (_timeInteraction >= _setting.TimeForClamped)
             {
                 OnInteractEnd.Invoke(InteractionEndTypes.Clamped);
             }
-            else if (_timeInteraction >= _timeForClick)
+            else if (_timeInteraction >= _setting.TimeForClick)
             {
                 OnInteractEnd.Invoke(InteractionEndTypes.Popped);
             }
@@ -110,7 +109,7 @@ namespace Madhouse.ADHD
         private bool CheckShake()
         {
             return MathF.Abs(MathF.Max(transform.position.x, _oldPosition.x) - MathF.Min(transform.position.x, _oldPosition.x))
-                + MathF.Abs(MathF.Max(transform.position.y, _oldPosition.y) - MathF.Min(transform.position.y, _oldPosition.y)) > _shakeDistance;
+                + MathF.Abs(MathF.Max(transform.position.y, _oldPosition.y) - MathF.Min(transform.position.y, _oldPosition.y)) > _setting.ShakeDistance;
         }
     }
 }

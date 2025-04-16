@@ -51,7 +51,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shapeInteraction: {fileID: 8713558993056276777}
+  _shapeMove: {fileID: 6518530885467080372}
   _shapeView: {fileID: 6218053142857548108}
+  _setting: {fileID: 11400000, guid: bd4539162214bcf4fbf03c775e0b75eb, type: 2}
 --- !u!114 &8713558993056276777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,9 +66,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 553d5da5d0f158a4886869c59aa98418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _layerMaskBackpack:
-    serializedVersion: 2
-    m_Bits: 2048
 --- !u!114 &6518530885467080372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,7 +78,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fb4560a752046e4891dab4a5078a621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
   _rigidbody2D: {fileID: 2585743050417308710}
   _shapeInteraction: {fileID: 8713558993056276777}
 --- !u!50 &2585743050417308710

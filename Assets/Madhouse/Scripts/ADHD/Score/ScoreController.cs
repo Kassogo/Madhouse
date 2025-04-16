@@ -13,10 +13,8 @@ namespace Madhouse.ADHD
         [SerializeField] private TaskController _taskController;
         [SerializeField] private ShapesDispatcher _spawner;
         [SerializeField] private ScoreView _scoreView;
-        [SerializeField] private int _addScoreForFirstTask = 2;
-        [SerializeField] private int _addScoreForSecondTask = 1;
-        [SerializeField] private int _removeScoreForWrongTask = 2;
-        [SerializeField] private int _removeScoreAfterChangeTask = 1;
+        [Space]
+        [SerializeField] private ScoreSetting _setting;
 
         private int _score;
         private bool _isMadeTask = false;
@@ -49,16 +47,16 @@ namespace Madhouse.ADHD
                 return;
 
             if (CheckCompledTask(_taskController.TaskChoosen.WrongTask, form, color, interactionEnd))
-                SetScore(_score - _removeScoreForWrongTask);
+                SetScore(_score - _setting.RemoveScoreForCompletWrongTask);
             else if (CheckCompledTask(_taskController.TaskChoosen.FirstTask, form, color, interactionEnd))
             {
                 _isMadeTask = true;
-                SetScore(_score + _addScoreForFirstTask);
+                SetScore(_score + _setting.AddScoreForCompletFirstTask);
             }
             else if (CheckCompledTask(_taskController.TaskChoosen.SecondTask, form, color, interactionEnd))
             {
                 _isMadeTask = true;
-                SetScore(_score + _addScoreForSecondTask);
+                SetScore(_score + _setting.AddScoreForCompletSecondTask);
             }
         }
 
@@ -93,7 +91,7 @@ namespace Madhouse.ADHD
         private void CheckMadeTask()
         {
             if (!_isMadeTask)
-                SetScore(_score - _removeScoreAfterChangeTask);
+                SetScore(_score - _setting.RemoveScoreForAfterChangeTask);
             _isMadeTask = false;
         }
     }

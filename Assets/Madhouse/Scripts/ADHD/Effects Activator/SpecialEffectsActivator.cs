@@ -12,16 +12,14 @@ namespace Madhouse.ADHD
         [SerializeField] private TaskController _taskController;
         [SerializeField] private ScoreController _scoreController;
         [Space]
-        [SerializeField] private int _scoreChange = 5;
-        [SerializeField] private float _timeEffect = 6;
-        [SerializeField] private float _timeCoefficientChange = 0.2f;
+        [SerializeField] private SpecialEffectsSetting _setting;
 
         private WaitForSecondsRealtime _waitForChangeTime;
 
         private void Awake()
         {
             _spawner.OnDestroySpecialObject += CheckDestroySpecialShape;
-            _waitForChangeTime = new WaitForSecondsRealtime(_timeEffect);
+            _waitForChangeTime = new WaitForSecondsRealtime(_setting.TimeEffect);
         }
 
         private void OnDestroy()
@@ -50,10 +48,10 @@ namespace Madhouse.ADHD
                     DeleteShape(_taskController.TaskChoosen.SecondTask);
                     break;
                 case SpecialShapeTypes.IncreaseScore:
-                    _scoreController.AddScore(_scoreChange);
+                    _scoreController.AddScore(_setting.ScoreChange);
                     break;
                 case SpecialShapeTypes.DecreaseScore:
-                    _scoreController.AddScore(-_scoreChange);
+                    _scoreController.AddScore(-_setting.ScoreChange);
                     break;
                 case SpecialShapeTypes.SlowerTime:
                     StartCoroutine(ChangeTime(true));
@@ -84,7 +82,7 @@ namespace Madhouse.ADHD
 
         private IEnumerator ChangeTime(bool isSlower)
         {
-            Time.timeScale = isSlower ? _timeCoefficientChange : Time.timeScale + _timeCoefficientChange;
+            Time.timeScale = isSlower ? _setting.TimeCoefficientChange : Time.timeScale + _setting.TimeCoefficientChange;
             yield return _waitForChangeTime;
             Time.timeScale = 1;
         }

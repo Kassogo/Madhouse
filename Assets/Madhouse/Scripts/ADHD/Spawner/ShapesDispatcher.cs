@@ -4,6 +4,9 @@ using Random = UnityEngine.Random;
 
 namespace Madhouse.ADHD
 {
+    /// <summary>
+    /// Диспетчер фигур.
+    /// </summary>
     public class ShapesDispatcher : MonoBehaviour
     {
         public event Action<ShapeTypes, ShapeColors, InteractionEndTypes> OnDestroyObject = delegate { }; 
@@ -11,12 +14,11 @@ namespace Madhouse.ADHD
 
         [SerializeField] private ShapeController _shapePrefab;
         [SerializeField] private SpecialShapeController _specialShapePrefab;
-        [SerializeField] private int _StartCountShape;
-        [SerializeField] private int _countShape;
+        [Space]
+        [SerializeField] private ShapesDispatcherSetting _setting;
 
         private ShapesPool _shapesPool;
         private SpecialShapePool _specialShapePool;
-        private float _cooldownCreated = 2f;
         private float _timerCreatedShape;
         private Vector3 _spawnPoint;
 
@@ -63,7 +65,7 @@ namespace Madhouse.ADHD
 
             InitializingPoolObjects();
 
-            for (int i = 0; i < _StartCountShape; i++)
+            for (int i = 0; i < _setting.StartCountShapes; i++)
                 CreatedShape();
         }
 
@@ -72,7 +74,7 @@ namespace Madhouse.ADHD
             if (_timerCreatedShape > Time.time)
                 return;
 
-            if (_shapesPool.CountActivateShape < _countShape)
+            if (_shapesPool.CountActivateShape < _setting.MaxCountShapes)
                 CreatedShape();
         }
 
@@ -90,7 +92,7 @@ namespace Madhouse.ADHD
 
         private void InitializingPoolObjects()
         {
-            _shapesPool = new ShapesPool(_shapePrefab, _countShape);
+            _shapesPool = new ShapesPool(_shapePrefab, _setting.MaxCountShapes);
             _shapesPool.OnUseShape += UseShape;
             _specialShapePool = new SpecialShapePool(_specialShapePrefab);
             _specialShapePool.OnUseSpecialObject += UseSpecialShape;
@@ -106,7 +108,7 @@ namespace Madhouse.ADHD
 
         private void CreatedShape()
         {
-            _timerCreatedShape = Time.time + _cooldownCreated;
+            _timerCreatedShape = Time.time + _setting.CooldownCreatedShape;
 
             ShapeController shape = _shapesPool.GetFromPool();
             shape.transform.position = _spawnPoint;

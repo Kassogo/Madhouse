@@ -7,14 +7,12 @@ namespace Madhouse.ADHD
     /// </summary>
     public class BackpackMover : MonoBehaviour
     {
-        [SerializeField] private float _speed = 10f;
+        [SerializeField] private BackpackSetting _backpackSettings;
 
         private bool _isMoveRight = true;
         private Vector3 _leftPoint;
         private Vector3 _rightPoint;
         private Vector3 _newPosition;
-        private float _minChangeDistance = 0.001f;
-        private float _offset = 1f;
 
         private void Awake() => SetPoints();
 
@@ -22,9 +20,10 @@ namespace Madhouse.ADHD
 
         private void Move()
         {
-            _newPosition = Vector3.Lerp(transform.position, _isMoveRight ? _rightPoint : _leftPoint, _speed * Time.deltaTime);
+            _newPosition = transform.position + (_isMoveRight ? Vector3.right : Vector3.left) * _backpackSettings.Speed * Time.deltaTime;
 
-            if(Mathf.Abs(_newPosition.x - transform.position.x) < _minChangeDistance)
+            if(_newPosition.x > _rightPoint.x ||
+                _newPosition.x < _leftPoint.x)
                 _isMoveRight = !_isMoveRight;
             
             transform.position = _newPosition;
@@ -35,12 +34,12 @@ namespace Madhouse.ADHD
             _leftPoint = Camera.main.ViewportToWorldPoint(Vector2.zero);
             _rightPoint = Camera.main.ViewportToWorldPoint(Vector2.right);
 
-            _leftPoint.x += _offset;
-            _leftPoint.y += _offset;
+            _leftPoint.x += _backpackSettings.OffsetCameraAngles;
+            _leftPoint.y += _backpackSettings.OffsetCameraAngles;
             _leftPoint.z = transform.position.z;
 
-            _rightPoint.x -= _offset;
-            _rightPoint.y += _offset;
+            _rightPoint.x -= _backpackSettings.OffsetCameraAngles;
+            _rightPoint.y += _backpackSettings.OffsetCameraAngles;
             _rightPoint.z = transform.position.z;
         }
     }

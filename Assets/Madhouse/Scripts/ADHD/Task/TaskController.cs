@@ -16,11 +16,8 @@ namespace Madhouse.ADHD
         [SerializeField] private ShapesDispatcher _spawner;
         [SerializeField] private TasksData _tasksData;
         [SerializeField] private TaskView _taskView;
-        [SerializeField] private float _minTimeChangeTask = 8;
-        [SerializeField] private float _maxTimeChangeTask = 15;
         [Space]
-        [SerializeField] private float _minTimeSpecialTask = 20;
-        [SerializeField] private float _maxTimeSpecialTask = 30;
+        [SerializeField] private TaskSetting _setting;
 
         private int _indexChooseTask;
         private List<int> _correctSpecialTypes;
@@ -70,13 +67,13 @@ namespace Madhouse.ADHD
 
             OnChangeTask.Invoke();
 
-            yield return new WaitForSeconds(Random.Range(_minTimeChangeTask, _maxTimeChangeTask));
+            yield return new WaitForSeconds(Random.Range(_setting.MinTimeChangeTask, _setting.MaxTimeChangeTask));
             StartCoroutine(ChangeTask());
         }
 
         private IEnumerator StartSpecialTask()
         {
-            yield return new WaitForSeconds(Random.Range(_minTimeSpecialTask, _maxTimeSpecialTask));
+            yield return new WaitForSeconds(Random.Range(_setting.MinTimeChangeSpecialTask, _setting.MaxTimeChangeSpecialTask));
 
             _chooseInteractionFoeSpecialShape = (InteractionEndTypes)Random.Range(0, System.Enum.GetValues(typeof(InteractionEndTypes)).Length - 1);
             _chooseSpecialShape = (SpecialShapeTypes)_correctSpecialTypes[Random.Range(0, _correctSpecialTypes.Count)];
