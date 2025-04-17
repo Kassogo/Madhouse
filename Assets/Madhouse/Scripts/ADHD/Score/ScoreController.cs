@@ -25,7 +25,7 @@ namespace Madhouse.ADHD
         /// <param name="changeScore"></param>
         public void AddScore(int changeScore)
         {
-            _scoreView.ShowScore(_score + changeScore);
+            SetScore(_score + changeScore);
         }
 
         private void Start()

@@ -22,8 +22,8 @@ namespace Madhouse.ADHD
         {
             _newPosition = transform.position + (_isMoveRight ? Vector3.right : Vector3.left) * _backpackSettings.Speed * Time.deltaTime;
 
-            if(_newPosition.x > _rightPoint.x ||
-                _newPosition.x < _leftPoint.x)
+            if((_newPosition.x > _rightPoint.x && _isMoveRight) ||
+                (_newPosition.x < _leftPoint.x && !_isMoveRight))
                 _isMoveRight = !_isMoveRight;
             
             transform.position = _newPosition;
