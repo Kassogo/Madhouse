@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5398d206692f7a54db7fc64189e48f63, type: 3}
-  m_Name: Levels
+  m_Script: {fileID: 11500000, guid: 4a86601fa415ced4fa67b23ea86d5ee4, type: 3}
+  m_Name: TaskSetting
   m_EditorClassIdentifier: 
-  _levelsData:
-  - _nameIllness: "\u0421\u0414\u0412\u0413"
-    _indexScene: 1
+  _minTimeChangeTask: 8
+  _maxTimeChangeTask: 15
+  _minTimeSpecialTask: 20
+  _maxTimeSpecialTask: 30

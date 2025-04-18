@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5398d206692f7a54db7fc64189e48f63, type: 3}
-  m_Name: Levels
+  m_Script: {fileID: 11500000, guid: 46da60b4fa70cba46b72b8d3be446ad0, type: 3}
+  m_Name: BackpackSetting
   m_EditorClassIdentifier: 
-  _levelsData:
-  - _nameIllness: "\u0421\u0414\u0412\u0413"
-    _indexScene: 1
+  _speed: 8
+  _offsetCameraAngles: 1
