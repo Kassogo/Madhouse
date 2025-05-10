@@ -36,6 +36,12 @@ namespace Madhouse.ADHD
             _distanceToCamera = Mathf.Abs(Camera.main.transform.position.z - transform.position.z);
         }
 
+        private void OnDisable()
+        {
+            _isInteraction = false;
+            _timeInteraction = 0f;
+        }
+
         private void OnMouseDown()
         {
             _offset = transform.position - GetMouseWorldPosition();
@@ -49,7 +55,8 @@ namespace Madhouse.ADHD
 
         private void OnMouseDrag()
         {
-            transform.position = GetMouseWorldPosition() + _offset;
+            if (_isInteraction)
+                transform.position = GetMouseWorldPosition() + _offset;
         }
 
         private void Update()

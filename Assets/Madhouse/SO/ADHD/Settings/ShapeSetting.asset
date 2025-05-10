@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speedMove: 4.03
   _cooldownCheckBorders: 0.5
+  _offsetClashCameraBoard: 0.4
   _layerMaskBackpack:
     serializedVersion: 2
     m_Bits: 2048

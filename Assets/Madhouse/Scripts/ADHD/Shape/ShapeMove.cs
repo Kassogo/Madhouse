@@ -21,8 +21,8 @@ namespace Madhouse.ADHD
         {
             _shapeInteraction = shapeInteraction;
             _setting = setting;
-            _topRightCamera = Camera.main.ViewportToWorldPoint(Vector3.one);
-            _downLeftCamera = Camera.main.ViewportToWorldPoint(Vector3.zero);
+            _topRightCamera = Camera.main.ViewportToWorldPoint(Vector3.one) - Vector3.one * setting.OffsetClashCameraBoard;
+            _downLeftCamera = Camera.main.ViewportToWorldPoint(Vector3.zero) + Vector3.one * setting.OffsetClashCameraBoard;
             _directionMove = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
             _timerCheck = Time.time + _setting.CooldownCheckBorders;
         }

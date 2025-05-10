@@ -11,6 +11,7 @@ namespace Madhouse.ADHD
         [Header("Movement")]
         [SerializeField] private float _speedMove;
         [SerializeField] private float _cooldownCheckBorders = 0.5f;
+        [SerializeField] private float _offsetClashCameraBoard = 0.5f;
         [Space]
         [Header("Interaction")]
         [SerializeField] private LayerMask _layerMaskBackpack;
@@ -32,6 +33,11 @@ namespace Madhouse.ADHD
         /// Кулдаун проверки границ камеры.
         /// </summary>
         public float CooldownCheckBorders => _cooldownCheckBorders;
+
+        /// <summary>
+        /// Расстояние удара фигуры от края карты.
+        /// </summary>
+        public float OffsetClashCameraBoard => _offsetClashCameraBoard;
 
         /// <summary>
         /// Слой физики рюкзака.
