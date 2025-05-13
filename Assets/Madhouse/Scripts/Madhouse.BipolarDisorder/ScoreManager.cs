@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 namespace Madhouse.BipolarDisorder
 {
@@ -9,7 +10,9 @@ namespace Madhouse.BipolarDisorder
     public class ScoreManager : MonoBehaviour
     {
         public static ScoreManager Instance { get; private set; }
-        public int _score = 0;
+        public int Score => _score; // Публичное свойство для доступа к счету
+
+        private int _score = 0;
         public event Action<int> OnScoreChanged;
 
         private void Awake()
@@ -25,12 +28,18 @@ namespace Madhouse.BipolarDisorder
             if (Instance == null)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject);
+                // DontDestroyOnLoad(gameObject); // Уберите эту строку, если ScoreManager должен сбрасываться при перезагрузке сцены
             }
             else
             {
                 Destroy(gameObject);
             }
+        }
+
+        private void OnEnable()
+        {
+            _score = 0;
+            OnScoreChanged?.Invoke(_score);
         }
 
         /// <summary>
@@ -43,6 +52,12 @@ namespace Madhouse.BipolarDisorder
             OnScoreChanged?.Invoke(_score);
 
             FindObjectOfType<BackgroundManager>()?.UpdateScore(_score);
+        }
+
+        public void ResetScore()
+        {
+            _score = 0;
+            OnScoreChanged?.Invoke(_score);
         }
     }
 }

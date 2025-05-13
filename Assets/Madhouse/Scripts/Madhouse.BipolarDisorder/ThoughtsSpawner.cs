@@ -1,18 +1,18 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 namespace Madhouse.BipolarDisorder
 {
-    /// <summary>
-    /// Spawns thoughts at a defined spawn point.
-    /// The spawn rate increases as the player's score increases.
-    /// </summary>
     public class ThoughtsSpawner : MonoBehaviour
     {
         [SerializeField] private GameObject _thoughtPrefab;
         [SerializeField] private Transform _spawnPoint;
         private float _spawnInterval = 1.5f;
-        private const float _minSpawnInterval = 0.5f; 
-        private const float _decreaseFactor = 0.05f; 
+        private const float _minSpawnInterval = 0.5f;
+        private const float _decreaseFactor = 0.05f;
+
+        // Объявляем событие, которое передает цвет
+        public UnityEvent<Color> OnThoughtSpawnedColor = new UnityEvent<Color>();
 
         private void Start()
         {
@@ -36,16 +36,22 @@ namespace Madhouse.BipolarDisorder
             if (_thoughtPrefab == null || _spawnPoint == null) return;
 
             GameObject newThought = Instantiate(_thoughtPrefab, _spawnPoint.position, Quaternion.identity);
-            AssignColor(newThought);
+            Color spawnedColor = AssignColor(newThought);
+
+            // Вызываем событие и передаем цвет
+            OnThoughtSpawnedColor?.Invoke(spawnedColor);
         }
 
-        private void AssignColor(GameObject thought)
+        private Color AssignColor(GameObject thought)
         {
             ThoughtsColor thoughtsColor = thought.GetComponent<ThoughtsColor>();
+            Color colorNow = Random.Range(0, 2) == 0 ? Color.black : Color.white;
+
             if (thoughtsColor != null)
             {
-                thoughtsColor.SetRandomColor();
+                thoughtsColor.SetColor(colorNow);
             }
+            return colorNow;
         }
 
         private void AdjustSpawnRate(int score)

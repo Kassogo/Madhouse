@@ -23,7 +23,7 @@ namespace Madhouse.BipolarDisorder
             if (ScoreManager.Instance == null) return;
 
             ScoreManager.Instance.OnScoreChanged += UpdateScoreText;
-            UpdateScoreText(ScoreManager.Instance._score);
+            UpdateScoreText(ScoreManager.Instance.Score); // Используем публичное свойство Score
         }
 
         private void OnDestroy()

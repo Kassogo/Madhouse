@@ -10,6 +10,28 @@ namespace Madhouse.BipolarDisorder
     {
         [SerializeField] private ColorMatcher _colorMatcher;
         [SerializeField] private ScoreManager _scoreManager;
+        [SerializeField] private ThoughtsSpawner _thoughtsSpawner; // —сылка на спаунер
+        [SerializeField] private ColorController _colorController; // —сылка на контроллер цвета игрока
+
+        private void OnEnable()
+        {
+            if (_thoughtsSpawner != null)
+            {
+                _thoughtsSpawner.OnThoughtSpawnedColor.AddListener(OnThoughtSpawned);
+            }
+            else
+            {
+                Debug.LogError("ThoughtsCollision: ThoughtsSpawner не назначен!");
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (_thoughtsSpawner != null)
+            {
+                _thoughtsSpawner.OnThoughtSpawnedColor.RemoveListener(OnThoughtSpawned);
+            }
+        }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -24,6 +46,11 @@ namespace Madhouse.BipolarDisorder
             }
 
             Destroy(collision.gameObject);
+        }
+
+        private void OnThoughtSpawned(Color spawnedColor)
+        {
+         
         }
     }
 }

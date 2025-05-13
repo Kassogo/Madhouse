@@ -7,6 +7,7 @@ namespace Madhouse.BipolarDisorder
     /// </summary>
     public class ThoughtsColor : MonoBehaviour
     {
+        
         private SpriteRenderer _spriteRenderer;
 
         private void Awake()
@@ -14,10 +15,10 @@ namespace Madhouse.BipolarDisorder
             _spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
-        public void SetRandomColor()
+        public void SetColor(Color color)
         {
             if (_spriteRenderer == null) return;
-            _spriteRenderer.color = Random.value > 0.5f ? Color.white : Color.black;
+            _spriteRenderer.color = color;
         }
     }
 }
