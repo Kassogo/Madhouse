@@ -15,16 +15,21 @@ MonoBehaviour:
   _shapeModels:
   - _shapePicture: {fileID: 943116791, guid: 09eae0b725d410a45be1b1dd369a7fc2, type: 3}
     _glarePicture: {fileID: 22751783, guid: 09eae0b725d410a45be1b1dd369a7fc2, type: 3}
+    _shadowPicture: {fileID: 711099576, guid: 5a62ab0d628cc6c45be8847a43ed6e41, type: 3}
     _shapeType: 0
   - _shapePicture: {fileID: -1405956613, guid: 09eae0b725d410a45be1b1dd369a7fc2, type: 3}
     _glarePicture: {fileID: 572706792, guid: 09eae0b725d410a45be1b1dd369a7fc2, type: 3}
+    _shadowPicture: {fileID: 1787727953, guid: 5a62ab0d628cc6c45be8847a43ed6e41, type: 3}
     _shapeType: 2
   - _shapePicture: {fileID: 507495495, guid: 09eae0b725d410a45be1b1dd369a7fc2, type: 3}
     _glarePicture: {fileID: 1747794735, guid: 09eae0b725d410a45be1b1dd369a7fc2, type: 3}
+    _shadowPicture: {fileID: 1787727953, guid: 5a62ab0d628cc6c45be8847a43ed6e41, type: 3}
     _shapeType: 1
   - _shapePicture: {fileID: -1552108552, guid: 09eae0b725d410a45be1b1dd369a7fc2, type: 3}
     _glarePicture: {fileID: 438969531, guid: 09eae0b725d410a45be1b1dd369a7fc2, type: 3}
+    _shadowPicture: {fileID: 1787727953, guid: 5a62ab0d628cc6c45be8847a43ed6e41, type: 3}
     _shapeType: 3
   - _shapePicture: {fileID: -1028646350, guid: 09eae0b725d410a45be1b1dd369a7fc2, type: 3}
     _glarePicture: {fileID: -242718597, guid: 09eae0b725d410a45be1b1dd369a7fc2, type: 3}
+    _shadowPicture: {fileID: 1164683363, guid: 5a62ab0d628cc6c45be8847a43ed6e41, type: 3}
     _shapeType: 4

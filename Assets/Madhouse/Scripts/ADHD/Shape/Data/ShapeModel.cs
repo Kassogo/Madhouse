@@ -10,6 +10,7 @@ namespace Madhouse.ADHD
     {
         [SerializeField] private Sprite _shapePicture;
         [SerializeField] private Sprite _glarePicture;
+        [SerializeField] private Sprite _shadowPicture;
         [SerializeField] private ShapeTypes _shapeType;
 
         /// <summary>
@@ -26,5 +27,10 @@ namespace Madhouse.ADHD
         /// Спрайт отражения.
         /// </summary>
         public Sprite Glare => _glarePicture;
+
+        /// <summary>
+        /// Спрайт тени.
+        /// </summary>
+        public Sprite Shadow => _shadowPicture;
     }
 }

@@ -11,6 +11,7 @@ namespace Madhouse.ADHD
         [SerializeField] private ColorsData _colorsData;
         [SerializeField] private SpriteRenderer _spriteShape;
         [SerializeField] private SpriteRenderer _spriteGlare;
+        [SerializeField] private SpriteRenderer _spriteShadow;
 
         /// <summary>
         /// Смена спрайта и цвета с соответствием с типами.
@@ -31,6 +32,7 @@ namespace Madhouse.ADHD
                 {
                     _spriteGlare.sprite = _shapesData.Shapes[i].Glare;
                     _spriteShape.sprite = _shapesData.Shapes[i].Picture;
+                    _spriteShadow.sprite = _shapesData.Shapes[i].Shadow;
                     break;
                 }
             }
