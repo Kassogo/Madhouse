@@ -9,12 +9,15 @@ namespace Madhouse.ADHD
     /// </summary>
     public class TaskView : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI _textFirstTask;
-        [SerializeField] private TextMeshProUGUI _textSecondTask;
-        [SerializeField] private TextMeshProUGUI _textWrongTask;
+        [SerializeField] private TaskLine _lineFirstTask;
+        [SerializeField] private TaskLine _lineSecondTask;
+        [SerializeField] private TaskLine _lineWrongTask;
         [Space]
-        [SerializeField] private TextMeshProUGUI _textSpecialTask;
+        [SerializeField] private TaskLine _lineSpecialTask;
         [SerializeField] private GameObject _panelSpecialTask;
+        [Space]
+        [SerializeField] private SpecialShapeData _specialShapeData;
+        [SerializeField] private TaskSetting _taskSettings;
 
         private readonly string[] _nameColors = {"Красные", "Синие", "Желтые", "Зелёные", "Фиолетовые"};
         private readonly string[] _nameForms = {"Круги", "Треугольники", "Квадраты", "Трапеции", "Ромбы"};
@@ -28,9 +31,9 @@ namespace Madhouse.ADHD
         /// <param name="task"></param>
         public void ShowTasks(TaskModel task)
         {
-            _textFirstTask.text = TaskConvertToString(task.FirstTask);
-            _textSecondTask.text = TaskConvertToString(task.SecondTask);
-            _textWrongTask.text = "Нельзя: " + TaskConvertToString(task.WrongTask);
+            TaskConvertToPictures(task.FirstTask, _lineFirstTask);
+            TaskConvertToPictures(task.SecondTask, _lineSecondTask);
+            TaskConvertToPictures(task.WrongTask, _lineWrongTask);
         }
 
         /// <summary>
@@ -41,7 +44,7 @@ namespace Madhouse.ADHD
         public void ShowSpecialTask(InteractionEndTypes interactionEndTypes, SpecialShapeTypes specialShapeTypes)
         {
             _panelSpecialTask.SetActive(true);
-            _textSpecialTask.text = _nameInteractions[(int)interactionEndTypes] + " " + _nameSpecialTypes[specialShapeTypes];
+            _lineSpecialTask.SetPictures(_taskSettings.GetSpriteInteraction(interactionEndTypes), _specialShapeData.GetSpacialShapes(specialShapeTypes));
         }
 
         /// <summary>
@@ -52,24 +55,34 @@ namespace Madhouse.ADHD
             _panelSpecialTask.SetActive(false);
         }
 
-        private string TaskConvertToString(Task task)
+        private void TaskConvertToPictures(Task task, TaskLine taskLine)
         {
             switch (task.Type)
             {
                 case TaskType.Color:
-                    return _nameColors[(int)task.ShapeColor];
+                    taskLine.SetPictures(null, _taskSettings.BlobSprite);
+                    taskLine.SetColor(_taskSettings.GetColor(task.ShapeColor));
+                    break;
                 case TaskType.Form:
-                    return _nameForms[(int)task.Form];
+                    taskLine.SetPictures(null, _taskSettings.GetForm(task.Form));
+                    break;
                 case TaskType.Interaction:
-                    return _nameInteractions[(int)task.Interaction];
+                    taskLine.SetPictures(_taskSettings.GetSpriteInteraction(task.Interaction));
+                    break;
                 case TaskType.InteractionAndColor:
-                    return _nameInteractions[(int)task.Interaction] + " " + _nameColors[(int)task.ShapeColor];
+                    taskLine.SetPictures(_taskSettings.GetSpriteInteraction(task.Interaction), _taskSettings.BlobSprite);
+                    taskLine.SetColor(_taskSettings.GetColor(task.ShapeColor));
+                    break;
                 case TaskType.InteractionAndForm:
-                    return _nameInteractions[(int)task.Interaction] + " " + _nameForms[(int)task.Form];
+                    taskLine.SetPictures(_taskSettings.GetSpriteInteraction(task.Interaction), _taskSettings.GetForm(task.Form));
+                    break;
                 case TaskType.ColorAndForm:
-                    return _nameColors[(int)task.ShapeColor] + " " + _nameForms[(int)task.Form];
+                    taskLine.SetPictures(null, _taskSettings.GetForm(task.Form));
+                    taskLine.SetColor(_taskSettings.GetColor(task.ShapeColor));
+                    break;
                 default:
-                    return "Strange type task!";
+                    Debug.LogError("Не найдено отображение этого типа задач");
+                    break;
             }
         }
 
