@@ -48,7 +48,7 @@ namespace Madhouse.ADHD
             OnEndInteraction.Invoke(interactionEndType, _type);
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             _shapeInteraction.OnInteractEnd -= EndInteraction;
         }
