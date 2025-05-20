@@ -13,12 +13,15 @@ namespace Madhouse.ADHD
     {
         public event Action OnChangeTask = delegate { };
 
+        public float TimeToNextTask => _timeToNextTask;
+
         [SerializeField] private ShapesDispatcher _spawner;
         [SerializeField] private TasksData _tasksData;
         [SerializeField] private TaskView _taskView;
         [Space]
         [SerializeField] private TaskSetting _setting;
 
+        private float _timeToNextTask;
         private int _indexChooseTask;
         private List<int> _correctSpecialTypes;
         private SpecialShapeTypes _chooseSpecialShape;
@@ -43,7 +46,7 @@ namespace Madhouse.ADHD
         {
             _indexChooseTask = Random.Range(0, _tasksData.Tasks.Count);
             _taskView.ShowTasks(TaskChoosen);
-            StartCoroutine(ChangeTask());
+            ChangeTask();
 
             _correctSpecialTypes = new();
             for (int i = 0; i < System.Enum.GetValues(typeof(SpecialShapeTypes)).Length; i += 2)
@@ -52,12 +55,19 @@ namespace Madhouse.ADHD
             _spawner.OnDestroySpecialObject += SpecialShapeInteract;
         }
 
+        private void Update()
+        {
+            if (_timeToNextTask <= 0)
+                ChangeTask();
+            _timeToNextTask -= Time.deltaTime;
+        }
+
         private void OnDestroy()
         {
             _spawner.OnDestroySpecialObject -= SpecialShapeInteract;
         }
 
-        private IEnumerator ChangeTask()
+        private void ChangeTask()
         {
             if (_indexChooseTask > _tasksData.Tasks.Count / 2)
                 _indexChooseTask = Random.Range(0, _tasksData.Tasks.Count / 2);
@@ -67,8 +77,7 @@ namespace Madhouse.ADHD
 
             OnChangeTask.Invoke();
 
-            yield return new WaitForSeconds(Random.Range(_setting.MinTimeChangeTask, _setting.MaxTimeChangeTask));
-            StartCoroutine(ChangeTask());
+            _timeToNextTask = Random.Range(_setting.MinTimeChangeTask, _setting.MaxTimeChangeTask);
         }
 
         private IEnumerator StartSpecialTask()
