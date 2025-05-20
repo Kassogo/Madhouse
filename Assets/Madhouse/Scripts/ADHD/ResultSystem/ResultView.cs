@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 namespace Madhouse.ADHD
 {
@@ -43,7 +44,7 @@ namespace Madhouse.ADHD
         {
             _colorVeil = Color.black;
             _colorVeil.a = visibility;
-            _blackVeil.color = _colorVeil;
+            _blackVeil.DOColor(_colorVeil, 2f);
         }
     }
 }
