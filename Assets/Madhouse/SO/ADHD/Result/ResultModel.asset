@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8da4344d9688e9a49b34b221893583ab, type: 3}
   m_Name: ResultModel
   m_EditorClassIdentifier: 
-  _winScore: 30
+  _winScore: 20
   _loseScore: -5

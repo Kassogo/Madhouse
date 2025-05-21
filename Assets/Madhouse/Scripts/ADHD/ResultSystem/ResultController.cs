@@ -36,6 +36,7 @@ namespace Madhouse.ADHD
             }
 
             CalculatingProximityToLoss(score);
+            _resultView.ChangeBackground(score, _resultModel.WinScore);
         }
 
         private void CalculatingProximityToLoss(int score)
