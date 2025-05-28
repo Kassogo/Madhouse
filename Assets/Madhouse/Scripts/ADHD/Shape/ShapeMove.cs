@@ -11,6 +11,7 @@ namespace Madhouse.ADHD
         [SerializeField] private ShapeInteraction _shapeInteraction;
 
         private Vector2 _directionMove;
+        private Vector2 _contactVector;
         private Vector3 _downLeftCamera;
         private Vector3 _topRightCamera;
         private float _timerCheck;
@@ -39,6 +40,12 @@ namespace Madhouse.ADHD
             Move();
         }
 
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            _contactVector = collision.GetContact(0).normal;
+            _directionMove = Vector2.Reflect(_directionMove, _contactVector).normalized;
+        }
+
         private void Move()
         {
             _rigidbody2D.velocity += _directionMove * _setting.SpeedMove * Time.deltaTime;
@@ -60,7 +67,7 @@ namespace Madhouse.ADHD
             {
                 ChangeDirection(true);
             }
-            else if(transform.position.x > _topRightCamera.x && _directionMove.x > 0)
+            else if (transform.position.x > _topRightCamera.x && _directionMove.x > 0)
             {
                 ChangeDirection(true);
             }

@@ -13,6 +13,8 @@ namespace Madhouse.ADHD
         /// </summary>
         public event Action<InteractionEndTypes> OnInteractEnd = delegate { };
 
+        [SerializeField] private BoxCollider2D _boxCollider2D;
+
         private Vector3 _offset;
         private Vector3 _mousePosition;
         private Vector3 _oldPosition;
@@ -39,17 +41,20 @@ namespace Madhouse.ADHD
         private void OnDisable()
         {
             _isInteraction = false;
+            _boxCollider2D.enabled = true;
             _timeInteraction = 0f;
         }
 
         private void OnMouseDown()
         {
+            _boxCollider2D.enabled = false;
             _offset = transform.position - GetMouseWorldPosition();
             _isInteraction = true;
         }
 
         private void OnMouseUp()
         {
+            _boxCollider2D.enabled = true;
             _isInteraction = false;
         }
 
