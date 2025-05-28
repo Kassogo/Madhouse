@@ -10,6 +10,12 @@ namespace Madhouse.ADHD
     {
         [SerializeField] private Image _interactionSprite;
         [SerializeField] private Image _objectSprite;
+        [SerializeField] private RectTransform _rectTransformMainPanel;
+
+        private void Awake()
+        {
+            _rectTransformMainPanel = GetComponent<RectTransform>();
+        }
 
         public void SetPictures(Sprite interaction = null, Sprite shape = null)
         {

@@ -36,7 +36,6 @@ namespace Madhouse.ADHD
             TaskConvertToPictures(task.FirstTask, _lineFirstTask);
             TaskConvertToPictures(task.SecondTask, _lineSecondTask);
             TaskConvertToPictures(task.WrongTask, _lineWrongTask);
-            _rectTransformMainPanel.ForceUpdateRectTransforms();
         }
 
         /// <summary>
