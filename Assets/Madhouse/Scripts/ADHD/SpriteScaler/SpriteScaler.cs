@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpriteScaler : MonoBehaviour
 {
+    [SerializeField] private float _scale = 1;
     private SpriteRenderer _spriteRenderer;
 
     private void Awake()
@@ -22,6 +23,7 @@ public class SpriteScaler : MonoBehaviour
         var spriteSize = _spriteRenderer.sprite.bounds.size;
         var screenSize = new Vector2(Camera.main.aspect * Camera.main.orthographicSize * 2, Camera.main.orthographicSize * 2);
         var scale = screenSize / spriteSize;
+        scale *= _scale;
         transform.localScale = new Vector3(scale.x, scale.y, 1);
     }
 }

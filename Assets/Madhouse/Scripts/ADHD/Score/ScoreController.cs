@@ -83,6 +83,8 @@ namespace Madhouse.ADHD
 
         private void SetScore(int score)
         {
+            if (_score > score)
+                _scoreView.ShowMistake();
             _score = score;
             _scoreView.ShowScore(_score);
             OnChangeScore.Invoke(_score);

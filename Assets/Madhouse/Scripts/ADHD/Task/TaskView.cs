@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 namespace Madhouse.ADHD
 {
@@ -9,6 +9,8 @@ namespace Madhouse.ADHD
     /// </summary>
     public class TaskView : MonoBehaviour
     {
+        [SerializeField] private RectTransform _rectTransformMainPanel;
+        [Space]
         [SerializeField] private TaskLine _lineFirstTask;
         [SerializeField] private TaskLine _lineSecondTask;
         [SerializeField] private TaskLine _lineWrongTask;
@@ -34,6 +36,7 @@ namespace Madhouse.ADHD
             TaskConvertToPictures(task.FirstTask, _lineFirstTask);
             TaskConvertToPictures(task.SecondTask, _lineSecondTask);
             TaskConvertToPictures(task.WrongTask, _lineWrongTask);
+            _rectTransformMainPanel.ForceUpdateRectTransforms();
         }
 
         /// <summary>
