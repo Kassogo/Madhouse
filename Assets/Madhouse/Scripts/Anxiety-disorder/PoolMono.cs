@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-//I copied this code...
 namespace Madhouse.AnxietyDisorder
 {
     public class PoolMono<T> where T : MonoBehaviour

@@ -5,14 +5,18 @@ TagManager:
   serializedVersion: 2
   tags:
   - Brain
+  - Shield
+  - BrainCentre
+  - Mines
+  - Coins
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Postprocessing
   - Water
   - UI
-  - 
+  - ParticleSystem
   - 
   - 
   - 
