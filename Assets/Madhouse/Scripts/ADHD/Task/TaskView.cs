@@ -9,8 +9,6 @@ namespace Madhouse.ADHD
     /// </summary>
     public class TaskView : MonoBehaviour
     {
-        [SerializeField] private RectTransform _rectTransformMainPanel;
-        [Space]
         [SerializeField] private TaskLine _lineFirstTask;
         [SerializeField] private TaskLine _lineSecondTask;
         [SerializeField] private TaskLine _lineWrongTask;

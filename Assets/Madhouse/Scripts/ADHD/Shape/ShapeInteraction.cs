@@ -37,31 +37,38 @@ namespace Madhouse.ADHD
             _setting = setting;
             _distanceToCamera = Mathf.Abs(Camera.main.transform.position.z - transform.position.z);
         }
-
-        private void OnDisable()
-        {
-            _isInteraction = false;
-            _boxCollider2D.enabled = true;
-            _timeInteraction = 0f;
-        }
-
-        private void OnMouseDown()
+        
+        public void Pick()
         {
             _boxCollider2D.enabled = false;
             _offset = transform.position - GetMouseWorldPosition();
             _isInteraction = true;
         }
 
-        private void OnMouseUp()
+        public void Drag()
+        {
+            if (_isInteraction)
+                transform.position = GetMouseWorldPosition() + _offset;
+        }
+
+        public void StopDrag()
         {
             _boxCollider2D.enabled = true;
             _isInteraction = false;
         }
 
-        private void OnMouseDrag()
+        public void CancelDrag()
         {
-            if (_isInteraction)
-                transform.position = GetMouseWorldPosition() + _offset;
+            _isInteraction = false;
+            _boxCollider2D.enabled = true;
+            _timeInteraction = 0f;
+        }
+
+        private void OnDisable()
+        {
+            _isInteraction = false;
+            _boxCollider2D.enabled = true;
+            _timeInteraction = 0f;
         }
 
         private void Update()
