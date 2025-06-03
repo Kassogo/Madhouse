@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a86601fa415ced4fa67b23ea86d5ee4, type: 3}
+  m_Name: TaskSetting
+  m_EditorClassIdentifier: 
+  _minTimeChangeTask: 8
+  _maxTimeChangeTask: 15
+  _minTimeSpecialTask: 20
+  _maxTimeSpecialTask: 30
+  _spritesInteraction:
+  - {fileID: 1711998863, guid: 15852a2f0c245884fb08be3a11358c68, type: 3}
+  - {fileID: 1773948322, guid: 15852a2f0c245884fb08be3a11358c68, type: 3}
+  - {fileID: 1968249651, guid: 15852a2f0c245884fb08be3a11358c68, type: 3}
+  - {fileID: 1965265796, guid: 15852a2f0c245884fb08be3a11358c68, type: 3}
+  _blob: {fileID: 21300000, guid: abd846d4078d6dd4b957dc28ad017507, type: 3}
+  _spritesForm: {fileID: 11400000, guid: e1bdc81007f0c3d40b6aea85bf6d38f6, type: 2}
+  _colors: {fileID: 11400000, guid: 1046212928821a34d9faf329a9780e98, type: 2}
