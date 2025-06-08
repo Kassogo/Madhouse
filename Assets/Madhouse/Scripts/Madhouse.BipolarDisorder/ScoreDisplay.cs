@@ -9,7 +9,7 @@ namespace Madhouse.BipolarDisorder
     public class ScoreDisplay : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _scoreText;
-
+        
         private void Awake()
         {
             if (_scoreText == null && !TryGetComponent(out _scoreText))

@@ -8,7 +8,7 @@ namespace Madhouse.BipolarDisorder
     {
         [SerializeField] private TextMeshProUGUI _staticThoughtText;
         [SerializeField] private ThoughtsSpawner _thoughtsSpawner; // —сылка на спаунер
-        [SerializeField] private Color _thoughtTextColor = Color.white; // ÷вет текста мысли (назначаетс€ в инспекторе)
+        [SerializeField] private Color _thoughtTextColor = Color.black; // ÷вет текста мысли (назначаетс€ в инспекторе)
 
         private Dictionary<int, string> manicThoughts = new()
         {
