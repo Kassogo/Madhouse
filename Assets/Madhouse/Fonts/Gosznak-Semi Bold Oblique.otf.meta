@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 13adaa80aedbb1b4888059fe0655c9e7
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Goznak
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 5035a2cd0da96054a9e73cc59019a0d6, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
