@@ -4,9 +4,6 @@ using UnityEngine.SceneManagement;
 
 namespace Madhouse.BipolarDisorder
 {
-    /// <summary>
-    /// Manages player lives.
-    /// </summary>
     public class LifeManager : MonoBehaviour
     {
         public static LifeManager Instance { get; private set; }
@@ -18,10 +15,10 @@ namespace Madhouse.BipolarDisorder
 
         private void Awake()
         {
+            Time.timeScale = 1;
             if (Instance == null)
             {
                 Instance = this;
-                // DontDestroyOnLoad(gameObject); // Убедитесь, что этой строки нет или она закомментирована
             }
             else
             {
@@ -35,7 +32,6 @@ namespace Madhouse.BipolarDisorder
 
         private void OnEnable()
         {
-            // Дополнительно сбрасываем жизни при включении объекта (после перезагрузки сцены)
             _lives = _startLives;
             OnLivesChanged?.Invoke(Lives);
         }
@@ -54,7 +50,6 @@ namespace Madhouse.BipolarDisorder
         private void GameOver()
         {
             FindObjectOfType<BackgroundManager>().OnLifeLost();
-            // Показываем панель Game Over
             if (GameOverPanel.Instance != null)
             {
                 GameOverPanel.Instance.ShowGameOver();
@@ -62,11 +57,10 @@ namespace Madhouse.BipolarDisorder
             else
             {
                 Debug.LogError("GameOverPanel.Instance is null!");
-                // Можно добавить загрузку сцены Game Over, если она отдельная
             }
         }
 
-        public void ResetLives() // Добавляем метод для явного сброса жизней
+        public void ResetLives()
         {
             _lives = _startLives;
             OnLivesChanged?.Invoke(Lives);

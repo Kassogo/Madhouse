@@ -2,9 +2,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-/// <summary>
-/// This script controls the behavior of the Game Over panel in the game.
-/// </summary >
 namespace Madhouse.BipolarDisorder
 {
     public class GameOverPanel : MonoBehaviour
@@ -12,6 +9,8 @@ namespace Madhouse.BipolarDisorder
         public static GameOverPanel Instance { get; private set; }
         [SerializeField] private GameObject _gameOverPanel;
         [SerializeField] private TextMeshProUGUI _gameOverText;
+        [SerializeField] private GameObject _restartButton;
+        [SerializeField] private GameObject _exitButton;
 
         private void Awake()
         {
@@ -24,15 +23,12 @@ namespace Madhouse.BipolarDisorder
                 Destroy(gameObject);
             }
 
-            _gameOverPanel.SetActive(false); // —крываем панель при старте
+            _gameOverPanel.SetActive(false);
         }
 
-        /// <summary>
-        /// Method to restart the game by reloading the current scene
-        /// </summary >
         public void RestartGame()
         {
-            // —брасываем жизни и очки перед перезапуском
+            Time.timeScale = 1;
             if (LifeManager.Instance != null)
             {
                 LifeManager.Instance.ResetLives();
@@ -44,11 +40,21 @@ namespace Madhouse.BipolarDisorder
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
+        public void QuitGame()
+        {
+            Application.Quit();
+            Debug.Log("Game has been quit (only works in a build)");
+        }
+
         private void Start()
         {
             if (LifeManager.Instance != null)
             {
                 LifeManager.Instance.OnLivesChanged += CheckGameOver;
+            }
+            if (ScoreManager.Instance != null)
+            {
+                ScoreManager.Instance.OnGameWin += ShowWin;
             }
         }
 
@@ -57,6 +63,10 @@ namespace Madhouse.BipolarDisorder
             if (LifeManager.Instance != null)
             {
                 LifeManager.Instance.OnLivesChanged -= CheckGameOver;
+            }
+            if (ScoreManager.Instance != null)
+            {
+                ScoreManager.Instance.OnGameWin -= ShowWin;
             }
         }
 
@@ -77,14 +87,24 @@ namespace Madhouse.BipolarDisorder
                 {
                     _gameOverText.text = "Game Over";
                 }
-                else
-                {
-                    Debug.LogError("GameOverPanel: _gameOverText is null!");
-                }
+                if (_restartButton != null) _restartButton.SetActive(true);
+                if (_exitButton != null) _exitButton.SetActive(false);
+                Time.timeScale = 0;
             }
-            else
+        }
+
+        public void ShowWin()
+        {
+            if (_gameOverPanel != null)
             {
-                Debug.LogError("GameOverPanel: _gameOverPanel is null!");
+                _gameOverPanel.SetActive(true);
+                if (_gameOverText != null)
+                {
+                    _gameOverText.text = "Win";
+                }
+                if (_restartButton != null) _restartButton.SetActive(false);
+                if (_exitButton != null) _exitButton.SetActive(true);
+                Time.timeScale = 0;
             }
         }
     }

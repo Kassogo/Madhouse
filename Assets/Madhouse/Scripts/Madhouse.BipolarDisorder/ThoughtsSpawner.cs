@@ -11,7 +11,6 @@ namespace Madhouse.BipolarDisorder
         private const float _minSpawnInterval = 0.5f;
         private const float _decreaseFactor = 0.05f;
 
-        // Объявляем событие, которое передает цвет
         public UnityEvent<Color> OnThoughtSpawnedColor = new UnityEvent<Color>();
 
         private void Start()
@@ -20,6 +19,7 @@ namespace Madhouse.BipolarDisorder
             if (ScoreManager.Instance != null)
             {
                 ScoreManager.Instance.OnScoreChanged += AdjustSpawnRate;
+                ScoreManager.Instance.OnGameWin += StopSpawning;
             }
         }
 
@@ -28,6 +28,7 @@ namespace Madhouse.BipolarDisorder
             if (ScoreManager.Instance != null)
             {
                 ScoreManager.Instance.OnScoreChanged -= AdjustSpawnRate;
+                ScoreManager.Instance.OnGameWin -= StopSpawning;
             }
         }
 
@@ -36,20 +37,19 @@ namespace Madhouse.BipolarDisorder
             if (_thoughtPrefab == null || _spawnPoint == null) return;
 
             GameObject newThought = Instantiate(_thoughtPrefab, _spawnPoint.position, Quaternion.identity);
-            Color spawnedColor = AssignColor(newThought);
+            Color spawnedColor = AssignSpriteAndColor(newThought); // Изменяем вызов метода
 
-            // Вызываем событие и передаем цвет
             OnThoughtSpawnedColor?.Invoke(spawnedColor);
         }
 
-        private Color AssignColor(GameObject thought)
+        private Color AssignSpriteAndColor(GameObject thought) // Изменяем имя метода
         {
             ThoughtsColor thoughtsColor = thought.GetComponent<ThoughtsColor>();
             Color colorNow = Random.Range(0, 2) == 0 ? Color.black : Color.white;
 
             if (thoughtsColor != null)
             {
-                thoughtsColor.SetColor(colorNow);
+                thoughtsColor.SetSprite(colorNow); // Вызываем новый метод SetSprite
             }
             return colorNow;
         }
@@ -63,6 +63,11 @@ namespace Madhouse.BipolarDisorder
                 CancelInvoke(nameof(SpawnThought));
                 InvokeRepeating(nameof(SpawnThought), _spawnInterval, _spawnInterval);
             }
+        }
+
+        private void StopSpawning()
+        {
+            CancelInvoke(nameof(SpawnThought));
         }
     }
 }

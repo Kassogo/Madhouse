@@ -4,31 +4,26 @@ using UnityEngine.SceneManagement;
 
 namespace Madhouse.BipolarDisorder
 {
-    /// <summary>
-    /// Manages the player's score.
-    /// </summary>
     public class ScoreManager : MonoBehaviour
     {
         public static ScoreManager Instance { get; private set; }
-        public int Score => _score; // Публичное свойство для доступа к счету
+        public int Score => _score;
 
         private int _score = 0;
+        private const int _winScore = 100;
         public event Action<int> OnScoreChanged;
+        public event Action OnGameWin;
 
         private void Awake()
         {
             InitializeSingleton();
         }
 
-        /// <summary>
-        /// Ensures this class follows the Singleton pattern.
-        /// </summary>
         private void InitializeSingleton()
         {
             if (Instance == null)
             {
                 Instance = this;
-                // DontDestroyOnLoad(gameObject); // Уберите эту строку, если ScoreManager должен сбрасываться при перезагрузке сцены
             }
             else
             {
@@ -42,16 +37,19 @@ namespace Madhouse.BipolarDisorder
             OnScoreChanged?.Invoke(_score);
         }
 
-        /// <summary>
-        /// Updates the score based on whether there is a match and triggers the score change event.
-        /// </summary>
-        /// <param name="isMatch"></param>
         public void UpdateScore(bool isMatch)
         {
+            if (Score >= _winScore) return;
+
             _score += isMatch ? 1 : -1;
             OnScoreChanged?.Invoke(_score);
 
             FindObjectOfType<BackgroundManager>()?.UpdateScore(_score);
+
+            if (_score >= _winScore)
+            {
+                OnGameWin?.Invoke();
+            }
         }
 
         public void ResetScore()

@@ -2,27 +2,39 @@ using UnityEngine;
 
 namespace Madhouse.BipolarDisorder
 {
-    /// <summary>
-    /// This class changes color of player from white to black 
-    /// </summary>
     public class ColorController : MonoBehaviour
     {
         [SerializeField] private InputController _inputController;
-        [SerializeField] private Color _positiveColor = Color.white;
-        [SerializeField] private Color _negativeColor = Color.black;
+        [SerializeField] private Sprite _whitePlayerSprite;
+        [SerializeField] private Sprite _blackPlayerSprite;
 
         private SpriteRenderer _spriteRenderer;
+        private bool _isPositiveColor = true;
+
+        // Новое публичное свойство для получения текущего "цвета" игрока
+        public Color CurrentPlayerColor
+        {
+            get
+            {
+                return _isPositiveColor ? Color.white : Color.black;
+            }
+        }
 
         private void Awake()
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
-            _spriteRenderer.color = _positiveColor;
+            _spriteRenderer.sprite = _whitePlayerSprite;
+            _isPositiveColor = true;
         }
 
         private void Start() => _inputController.onKeyDownAction += ChangeColor;
 
         private void OnDestroy() => _inputController.onKeyDownAction -= ChangeColor;
 
-        private void ChangeColor() => _spriteRenderer.color = _spriteRenderer.color == _positiveColor ? _negativeColor : _positiveColor;
+        private void ChangeColor()
+        {
+            _isPositiveColor = !_isPositiveColor;
+            _spriteRenderer.sprite = _isPositiveColor ? _whitePlayerSprite : _blackPlayerSprite;
+        }
     }
 }
