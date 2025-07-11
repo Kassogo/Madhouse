@@ -40,12 +40,14 @@ public class Money : MonoBehaviour
     
     IEnumerator DelayMoney(float coinValue)
     {
+        int soundIndex = Random.Range(1, 6);
         if (coinValue > 5)
         {
             for (float i = 1; i <= coinValue; i++)
             {
                 _cntMoney++;
                 UpdateMoneyText();
+                SoundManager.instance.Coin(soundIndex);
                 yield return new WaitForSeconds(0.1f);
             }
         }
@@ -55,6 +57,7 @@ public class Money : MonoBehaviour
             {
                 _cntMoney++;
                 UpdateMoneyText();
+                SoundManager.instance.Coin(soundIndex);
                 yield return new WaitForSeconds(0.2f);
             }
         }

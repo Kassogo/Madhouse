@@ -1,7 +1,9 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 using static UnityEngine.ParticleSystem;
 
 //In this script, the value of brain health is set and changed
@@ -12,11 +14,20 @@ namespace Madhouse.AnxietyDisorder
         [SerializeField] GameObject _particleSystemForceFieldGO;
         [SerializeField] GameObject _particleSystemGO;
         [SerializeField] GameObject _camera;
+        [SerializeField] GameObject _panel;
+
+        [SerializeField] private GameObject _brainBodyDamageVisual;
+
+        public bool gameProcess;
+        public bool _lose;
+        public float _maxVignette;
 
         public static HealthBar instance;
 
-        private float _maxHP;
-        private float _currentHP;
+        public float _maxHP;
+        public float _currentHP;
+
+        private bool hpRecovery;
 
         private ParticleSystemForceField _circleOfParticles;
         private float _maxScale;
@@ -24,16 +35,19 @@ namespace Madhouse.AnxietyDisorder
 
         private PostProcessVolume _volume;
         private Vignette _vignette;
-        private float _maxVignette;
         private float _currentVignette;
 
         private void Awake()
         {
             instance = this;
+            gameProcess = true;
         }
 
         private void Start()
         {
+            _lose = false;
+            hpRecovery = false;
+
             _maxHP = 100f;
             _currentHP = _maxHP;
 
@@ -54,18 +68,30 @@ namespace Madhouse.AnxietyDisorder
         {
             if(_currentHP > 0)
             {
-                _currentHP -= damagePoint * Bonuses.instance.confidenceScale;
+                if (hpRecovery == false)
+                {
+                    _currentHP -= damagePoint * Bonuses.instance.confidenceScale;
+                    SoundManager.instance.BrainHit();
+                    StartCoroutine(BrainBodyDamage());
+                }
             }
-            else
+            else if (_lose == false)
             {
-                _currentHP = 0;
+                _lose = true;
+                _panel.SetActive(true);
+                Panel.instance.StartFadeIn();
             }
             _updateHealthBar();
         }
 
         //updating healthbar
-        private void _updateHealthBar()
+        public void _updateHealthBar()
         {
+            if (_currentHP > 100)
+            {
+                _currentHP = 100;
+            }
+
             if(_currentScale > 0)
             {
                 _currentScale = _maxScale * (_currentHP / _maxHP);
@@ -74,6 +100,29 @@ namespace Madhouse.AnxietyDisorder
 
             _currentVignette = _maxVignette * (_currentHP / _maxHP);
             _vignette.intensity.value = _maxVignette - _currentVignette;
+        }
+
+        public void FullHP()
+        {
+            StartCoroutine(StartFullHP());
+        }
+        IEnumerator StartFullHP()
+        {
+            hpRecovery = true;
+            while (_currentHP < _maxHP)
+            {
+                _currentHP += 5;
+                _updateHealthBar();
+                yield return new WaitForSeconds(0.1f);
+            }
+            hpRecovery = false;
+        }
+
+        private IEnumerator BrainBodyDamage()
+        {
+            _brainBodyDamageVisual.SetActive(true);
+            yield return new WaitForSeconds(0.1f);
+            _brainBodyDamageVisual.SetActive(false);
         }
     }
 }

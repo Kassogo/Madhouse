@@ -11,24 +11,27 @@ namespace Madhouse.AnxietyDisorder
         [SerializeField] private GameObject _enemyVisual1;
         [SerializeField] private GameObject _enemyVisual2;
         [SerializeField] private GameObject _enemyVisual3;
+
         [SerializeField] private GameObject _enemyDamageVisual1;
         [SerializeField] private GameObject _enemyDamageVisual2;
         [SerializeField] private GameObject _enemyDamageVisual3;
 
         private float _direction;
-        private float _healthPoit;
+        private float _healthPoint;
         private Transform _target;
         private bool _canMove;
         private bool _canAttack;
         private float _reloadTimer = 1f;
         private float _randomVisual;
 
+        private bool finallPartPreparationReady;
+
         private void OnEnable()
         {
             _target = GameObject.FindGameObjectWithTag("BrainCentre").transform;
             _canMove = true;
             _canAttack = true;
-            _healthPoit = 8;
+            _healthPoint = 6;
 
             _direction = 1;
 
@@ -52,6 +55,8 @@ namespace Madhouse.AnxietyDisorder
             {
                 _enemyVisual3.SetActive(true);
             }
+
+            finallPartPreparationReady = true;
         }
 
         private void OnDisable()
@@ -67,18 +72,37 @@ namespace Madhouse.AnxietyDisorder
                 transform.position = Vector2.MoveTowards(transform.position, _target.transform.position, _moveSpeed * Time.deltaTime * _direction * Bonuses.instance.mentalOrderScale);
             }
             Flip();
+
+            if (Timer.instance.finallPartPreparation == true && finallPartPreparationReady == true)
+            {
+                finallPartPreparationReady = false;
+                StartCoroutine(FinallPartPreparation());
+            }
+
+            if (HealthBar.instance.gameProcess == false)
+            {
+                Deactivate();
+            }
         }
 
         //taking away the enemy's health and destroying the enemy
         public void TakeEnemyDamage()
         {
-            _healthPoit -= 1;
+            if (Timer.instance.onSuperPower == true)
+            {
+                _healthPoint -= 2f;
+            }
+            else
+            {
+                _healthPoint -= 1;
+            }
 
-            if (_healthPoit <= 0)
+            if (_healthPoint <= 0)
             {
                 CoinPool.instance.CreateCoin(transform.position, 1f);
                 Money.instance.AddMoney(5);
                 ExplosionPool.instance.CreateExplosion(transform.position, 0.1f);
+                Timer.instance.cntEnemiesDie++;
                 this.Deactivate();
             }
             else
@@ -90,6 +114,7 @@ namespace Madhouse.AnxietyDisorder
         //enemy deactivation
         private void Deactivate()
         {
+            SoundManager.instance.EnemyDie();
             this.gameObject.SetActive(false);
         }
 
@@ -145,6 +170,8 @@ namespace Madhouse.AnxietyDisorder
         {
             if(Bonuses.instance.mindBreathOn == false)
             {
+                SoundManager.instance.SmallEnemyHit();
+                SoundManager.instance.Hit();
                 TakeEnemyDamage();
             }
         }
@@ -153,6 +180,8 @@ namespace Madhouse.AnxietyDisorder
         {
             if (Bonuses.instance.mindBreathOn == true)
             {
+                SoundManager.instance.SmallEnemyHit();
+                SoundManager.instance.BreathBlade();
                 TakeEnemyDamage();
             }
         }
@@ -200,6 +229,22 @@ namespace Madhouse.AnxietyDisorder
                 _enemyDamageVisual2.GetComponent<SpriteRenderer>().flipX = false;
                 _enemyDamageVisual3.GetComponent<SpriteRenderer>().flipX = false;
             }
+        }
+
+        IEnumerator FinallPartPreparation()
+        {
+            float time = Random.Range(0, 6);
+
+            while (time > 0)
+            {
+                time -= Time.deltaTime;
+                yield return null;
+            }
+
+            CoinPool.instance.CreateCoin(transform.position, 1.5f);
+            Money.instance.AddMoney(10);
+            ExplosionPool.instance.CreateExplosion(transform.position, 0.15f);
+            this.Deactivate();
         }
     }
 }

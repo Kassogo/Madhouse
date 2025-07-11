@@ -4,12 +4,14 @@ public class BrainBody : MonoBehaviour
 {
     [SerializeField] GameObject circle;
     [SerializeField] GameObject prints;
+    [SerializeField] private GameObject _brainBodyDamageVisual;
     public float rotateSpeed;
     public float circleRotateSpeed;
     public float printsRotateSpeed;
 
     void Start()
     {
+        _brainBodyDamageVisual.SetActive(false);
         transform.rotation = Quaternion.identity;
     }
 

@@ -42,13 +42,17 @@ namespace Madhouse.AnxietyDisorder
         private void ReloadTimer()
         {
             _timeUnit = Timer.instance._timeUnit;
-            _timer = Random.Range(_timeUnit * 2f, _timeUnit * 4f);
+            _timer = Random.Range(_timeUnit * 2f, _timeUnit * 6f);
         }
 
         private void CreateEnemy()
         {
-            var enemy = this.pool.GetFreeElement();
-            enemy.transform.position = CalcEnemyPosition();
+            if ((Timer.instance.finallPartPreparation == false || Timer.instance.finallPart == true) && Timer.instance.endGame == false && !Timer.instance.restOn)
+            {
+                var enemy = this.pool.GetFreeElement();
+                enemy.transform.position = CalcEnemyPosition();
+                Timer.instance.cntEnemiesBorn++;
+            }
         }
 
         private Vector3 CalcEnemyPosition()

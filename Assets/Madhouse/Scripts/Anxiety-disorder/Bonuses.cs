@@ -1,3 +1,4 @@
+using Madhouse.AnxietyDisorder;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -27,6 +28,8 @@ public class Bonuses : MonoBehaviour
     public bool mindBreathOn;
     public float confidenceScale;
     public float mentalOrderScale;
+
+    public bool inspirationOn;
 
     private float _maxConfidenceBarValue;
     private float _maxMindOrderBarValue;
@@ -58,75 +61,154 @@ public class Bonuses : MonoBehaviour
         _currentConfidenceBarValue = 0;
         _currentMindOrderBarValue = 0;
 
+        inspirationOn = false;
+
         UpdateConfidenceBarAndText();
         UpdateMindOrderBarAndText();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (!LevelManager.instance.onPause)
         {
-            ShieldActivate();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            MindBreathActivate();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            ConfidenceBoost();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            MindOrderBoost();
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                ShieldActivate();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                MindBreathActivate();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                ConfidenceBoost();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                MindOrderBoost();
+            }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                InspirationActivate();
+            }
         }
     }
 
     public void ShieldActivate()
     {
-        if (shieldOn == false && Money.instance._cntMoney >= 40)
+        if (!Panel.instance.TheEnd)
         {
-            Money.instance.SubMoney(40);
+            SoundManager.instance.ButtonClick();
+            if (shieldOn == false && Money.instance._cntMoney >= 30)
+            {
+                SoundManager.instance.CatPurr();
 
-            shieldGO.SetActive(true);
-            shieldOn = true;
-            StartCoroutine(ShieldBar());
+                Money.instance.SubMoney(30);
+
+                shieldGO.SetActive(true);
+                shieldOn = true;
+                StartCoroutine(ShieldBar());
+            }
         }
     }
 
     public void MindBreathActivate()
     {
-        if (mindBreathOn == false && Money.instance._cntMoney >= 35)
+        if (!Panel.instance.TheEnd)
         {
-            Money.instance.SubMoney(35);
+            SoundManager.instance.ButtonClick();
+            if (mindBreathOn == false && Money.instance._cntMoney >= 35)
+            {
+                SoundManager.instance.WomanBreath();
 
-            mindBreathGO.SetActive(true);
-            mindBreathOn = true;
-            StartCoroutine(MindBreathBar());
+                Money.instance.SubMoney(35);
+
+                mindBreathGO.SetActive(true);
+                mindBreathOn = true;
+                StartCoroutine(MindBreathBar());
+            }
         }
     }
 
     public void ConfidenceBoost()
     {
-        if (confidenceScale > 0.5 && Money.instance._cntMoney >= 30)
+        if (!Panel.instance.TheEnd)
         {
-            Money.instance.SubMoney(30);
+            SoundManager.instance.ButtonClick();
+            if (confidenceScale > 0.5 && Money.instance._cntMoney >= 40 && Timer.instance.CanBuyBoost() == true)
+            {
+                SoundManager.instance.ConfidenceBoost();
 
-            confidenceScale -= 0.05f;
-            _currentConfidenceBarValue += 10;
-            UpdateConfidenceBarAndText();
+                Money.instance.SubMoney(40);
+
+                confidenceScale -= 0.05f;
+                _currentConfidenceBarValue += 10;
+                UpdateConfidenceBarAndText();
+
+                if (_currentConfidenceBarValue >= 100 && _currentMindOrderBarValue >= 100)
+                {
+                    Timer.instance.Finall();
+                }
+            }
         }
     }
 
     public void MindOrderBoost()
     {
-        if (mentalOrderScale > 0.5 && Money.instance._cntMoney >= 35)
+        if (!Panel.instance.TheEnd)
         {
-            Money.instance.SubMoney(35);
+            SoundManager.instance.ButtonClick();
+            if (mentalOrderScale > 0.5 && Money.instance._cntMoney >= 40 && Timer.instance.CanBuyBoost() == true)
+            {
+                SoundManager.instance.MindOrderBoost();
 
-            mentalOrderScale -= 0.05f;
-            _currentMindOrderBarValue += 10;
-            UpdateMindOrderBarAndText();
+                Money.instance.SubMoney(40);
+
+                mentalOrderScale -= 0.05f;
+                _currentMindOrderBarValue += 10;
+                UpdateMindOrderBarAndText();
+
+                if (_currentConfidenceBarValue >= 100 && _currentMindOrderBarValue >= 100)
+                {
+                    Timer.instance.Finall();
+                }
+            }
+        }
+    }
+
+    public void InspirationActivate()
+    {
+        if (!Panel.instance.TheEnd && inspirationOn)
+        {
+                SoundManager.instance.ButtonClick();
+
+                if (HealthBar.instance._currentHP > 60 && Money.instance._cntMoney >= 60)
+                {
+                    Money.instance.SubMoney(60);
+
+                    HealthBar.instance.FullHP();
+
+                    Inspiration.instance.ReloadInspirationTimer();
+                    SoundManager.instance.Inspiration();
+                }
+                else if (HealthBar.instance._currentHP >= 30 && HealthBar.instance._currentHP <= 60 && Money.instance._cntMoney >= 50)
+                {
+                    Money.instance.SubMoney(50);
+
+                    HealthBar.instance.FullHP();
+
+                    Inspiration.instance.ReloadInspirationTimer();
+                    SoundManager.instance.Inspiration();
+                }
+                else if (HealthBar.instance._currentHP < 30 && Money.instance._cntMoney >= 40)
+                {
+                    Money.instance.SubMoney(40);
+
+                    HealthBar.instance.FullHP();
+
+                    Inspiration.instance.ReloadInspirationTimer();
+                    SoundManager.instance.Inspiration();
+                }
         }
     }
 
@@ -157,12 +239,12 @@ public class Bonuses : MonoBehaviour
     private void UpdateConfidenceBarAndText()
     {
         confidenceBar.fillAmount = _currentConfidenceBarValue / _maxConfidenceBarValue;
-        confidenceText.text = $"{_currentConfidenceBarValue} %";
+        confidenceText.text = $"{_currentConfidenceBarValue}%";
     }
 
     private void UpdateMindOrderBarAndText()
     {
         mindOrderBar.fillAmount = _currentMindOrderBarValue / _maxMindOrderBarValue;
-        mindOrderText.text = $"{_currentMindOrderBarValue} %";
+        mindOrderText.text = $"{_currentMindOrderBarValue}%";
     }
 }
