@@ -15,3 +15,5 @@ MonoBehaviour:
   _levelsData:
   - _nameIllness: "\u0421\u0414\u0412\u0413"
     _indexScene: 1
+  - _nameIllness: "\u0411\u0438\u043F\u043E\u043B\u044F\u0440\u043D\u043E\u0435 \u0440\u0430\u0441\u0441\u0442\u0440\u043E\u0439\u0441\u0442\u0432\u043E "
+    _indexScene: 2
