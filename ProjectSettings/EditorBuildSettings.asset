@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Madhouse/Scenes/MainMenu.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Madhouse/Scenes/Anxiety-disorder.unity
-    guid: 3cd70a850bf99874d84e84877a3cbc1e
+    path: Assets/Madhouse/Scenes/ADHD.unity
+    guid: bcc5a6d5df69d35429113dcfe9664380
+  - enabled: 1
+    path: Assets/Madhouse/Scenes/BipolarDisorder.unity
+    guid: 48ec6b2ee0ae4544a822d60a96ea9fc9
   m_configObjects: {}
