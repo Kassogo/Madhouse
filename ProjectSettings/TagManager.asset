@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Brain
+  - Shield
+  - BrainCentre
+  - Mines
+  - Coins
   layers:
   - Default
   - TransparentFX
@@ -11,7 +16,7 @@ TagManager:
   - Postprocessing
   - Water
   - UI
-  - 
+  - ParticleSystem
   - 
   - 
   - 
@@ -40,4 +45,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Objects
+    uniqueID: 2237810491
+    locked: 0
+  - name: UI
+    uniqueID: 2439413555
     locked: 0
