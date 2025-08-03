@@ -42,8 +42,7 @@ namespace Madhouse.BipolarDisorder
 
         public void QuitGame()
         {
-            Application.Quit();
-            Debug.Log("Game has been quit (only works in a build)");
+            SceneManager.LoadScene(0);
         }
 
         private void Start()

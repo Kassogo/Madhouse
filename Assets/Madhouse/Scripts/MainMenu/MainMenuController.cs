@@ -1,45 +1,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
     [SerializeField] private LevelsData _levelsData;
     [SerializeField] private Transform _contantPlace;
     [SerializeField] private LineLevel _line;
+    [SerializeField] private Button _buttonNext;
+    [SerializeField] private Button _buttonPlay;
+    [SerializeField] private MainMenuView _menuView;
 
-    private List<LineLevel> _lines;
+    private int _indexLevel = 0;
 
     private void OnEnable()
     {
-        CreateLevelLines();
+        _buttonNext.onClick.AddListener(SetNextDistraction);
+        _menuView.Set(_levelsData.Levels[0]);
     }
 
     private void OnDisable()
     {
-        DestroyLevelLines();
+        _buttonNext.onClick.RemoveListener(SetNextDistraction);
     }
 
-    private void CreateLevelLines()
+    private void SetNextDistraction()
     {
-        _lines = new();
-        for (int i = 0; i < _levelsData.Levels.Count; i++)
-        {
-            LineLevel lineLevel = Instantiate(_line, _contantPlace);
-            lineLevel.Init(_levelsData.Levels[i]);
-            lineLevel.OnTouchLineLevel += LoadLevel;
-            _lines.Add(lineLevel);
-        }
-    }
+        _indexLevel++;
+        if (_indexLevel >= _levelsData.Levels.Count)
+            _indexLevel = 0;
 
-    private void DestroyLevelLines()
-    {
-        for (int i = 0; i < _lines.Count; i++)
-        {
-            _lines[i].OnTouchLineLevel -= LoadLevel;
-            Destroy(_lines[i].gameObject);
-        }
-        _lines = null;
+        _menuView.Set(_levelsData.Levels[_indexLevel]);
     }
 
     private void LoadLevel(LevelModel levelModel)
