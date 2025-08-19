@@ -14,6 +14,5 @@ public class MainMenuView : MonoBehaviour
     {
         image.sprite = levelModel.Picture;
         textMesh.text = levelModel.Story;
-        textill.text = levelModel.NameIllness;
     }
 }

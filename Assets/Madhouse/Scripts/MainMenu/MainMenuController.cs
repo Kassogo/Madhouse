@@ -17,12 +17,14 @@ public class MainMenuController : MonoBehaviour
     private void OnEnable()
     {
         _buttonNext.onClick.AddListener(SetNextDistraction);
+        _buttonPlay.onClick.AddListener(LoadLevel);
         _menuView.Set(_levelsData.Levels[0]);
     }
 
     private void OnDisable()
     {
         _buttonNext.onClick.RemoveListener(SetNextDistraction);
+        _buttonPlay.onClick.RemoveListener(LoadLevel);
     }
 
     private void SetNextDistraction()
@@ -34,8 +36,8 @@ public class MainMenuController : MonoBehaviour
         _menuView.Set(_levelsData.Levels[_indexLevel]);
     }
 
-    private void LoadLevel(LevelModel levelModel)
+    private void LoadLevel()
     {
-        SceneManager.LoadScene(levelModel.IndexScene);
+        SceneManager.LoadScene(_levelsData.Levels[_indexLevel].IndexScene);
     }
 }
