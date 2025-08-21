@@ -72,7 +72,7 @@ namespace Madhouse.ADHD
             Time.timeScale = _timeScaleNow;
         }
 
-        private void GoToMainMenu() => SceneManager.LoadScene(0);
+        private void GoToMainMenu() => SceneManager.LoadScene(1);
         private void RestartLevel() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

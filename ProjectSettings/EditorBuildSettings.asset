@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Madhouse/Scenes/StartMenu.unity
+    guid: 47b5ea98e4e737346b51463df6dda7a4
+  - enabled: 1
     path: Assets/Madhouse/Scenes/MainMenu.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1

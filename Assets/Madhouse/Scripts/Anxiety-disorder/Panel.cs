@@ -77,7 +77,7 @@ public class Panel : MonoBehaviour
     public void Menu()
     {
         SoundManager.instance.ButtonClick();
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public void PauseOn()
